@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurslar - Feruza Channel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/courses.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="courses-page-v2">
+    <!-- Main Header (Integrated) -->
+    <header class="main-header">
+        <nav class="container">
+            <div class="logo">Feruza <span class="accent">Channel</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Bosh sahifa</a></li>
+                <li><a href="courses.html" class="active">Kurslar</a></li>
+                <li><a href="contact.html">Aloqa</a></li>
+            </ul>
+            <a href="register.html" id="auth-nav-btn" class="btn btn-nav">Ro'yxatdan o'tish</a>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <p class="section-label">Library</p>
+                <ul class="sidebar-nav">
+                    <li class="active"><i>📁</i> Barcha darslar</li>
+                    <li><i>⭐</i> Sevimlilar</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <p class="section-label">Folders</p>
+                <ul class="sidebar-nav">
+                    <li><i>📂</i> N5 Boshlang'ich</li>
+                    <li><i>📂</i> N4 Davomchi</li>
+                    <li><i>📂</i> N3 O'rta daraja</li>
+                    <li><i>📂</i> N2 Yuqori</li>
+                    <li><i>📂</i> N1 Ekspert</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <p class="section-label">Showcases</p>
+                <ul class="sidebar-nav">
+                    <li><i>🎬</i> Jonli darslar</li>
+                    <li><i>📝</i> Testlar</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="search-bar-wrapper">
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="course-search" placeholder="Search videos">
+                </div>
+            </div>
+
+            <div id="lessons-list" class="video-grid">
+                <!-- Lessons will be loaded by JS -->
+                <!-- Static Placeholder Example from Reference -->
+                <div class="video-placeholder-card">
+                    <div class="video-thumb-wrapper">
+                        <div class="thumb-placeholder"></div>
+                        <span class="duration">12:10</span>
+                    </div>
+                    <h3 class="video-title">Yapon tili asoslari N5 - Kirish</h3>
+                </div>
+                <div class="video-placeholder-card">
+                    <div class="video-thumb-wrapper">
+                        <div class="thumb-placeholder"></div>
+                        <span class="duration">08:45</span>
+                    </div>
+                    <h3 class="video-title">Kanji yozish sirlari</h3>
+                </div>
+            </div>
+
+            <!-- Empty State (Hidden if lessons exist) -->
+            <div id="empty-dashboard" class="empty-dashboard-state" style="display: none;">
+                <p>Qidiruv bo'yicha hech narsa topilmadi.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const authBtn = document.getElementById('auth-nav-btn');
+            if (getAuthToken()) {
+                authBtn.href = "profile.html";
+                authBtn.innerText = "Kabinet";
+            }
+        });
+    </script>
+</body>
+
+</html>

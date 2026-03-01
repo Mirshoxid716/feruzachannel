@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tizimga kirish - Feruza Channel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark-blue);
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .auth-form button {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .auth-links a {
+            color: var(--accent-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Tizimga Kirish</h1>
+        <nav style="margin-top: 1.5rem;">
+            <ul>
+                <li><a href="index.html">Bosh sahifa</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="auth-container animate">
+            <h2>Xush kelibsiz!</h2>
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label>Email manzilingiz</label>
+                    <input type="email" id="login-email" required placeholder="example@mail.com">
+                </div>
+                <div class="form-group">
+                    <label>Parol</label>
+                    <input type="password" id="login-password" required placeholder="Parol">
+                </div>
+                <button type="submit" class="btn btn-primary">Kirish</button>
+                <div id="login-error" style="color: red; margin-top: 1rem; text-align: center;"></div>
+            </form>
+            <div class="auth-links">
+                Hisobingiz yo'qmi? <a href="register.html">Ro'yxatdan o'tish</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Feruza Channel.</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', handleLogin);
+    </script>
+</body>
+
+</html>

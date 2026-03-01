@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darslarni Boshqarish - Feruza Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="admin-page">
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="logo">Feruza <span class="accent">Admin</span></div>
+            <nav class="admin-nav">
+                <li><a href="admin.html" style="color: inherit; text-decoration: none; display: block;"><i>📊</i> Umumiy
+                        holat</a></li>
+                <li class="active"><a href="admin-lessons.html"
+                        style="color: inherit; text-decoration: none; display: block;"><i>📚</i> Darslarni
+                        boshqarish</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="logoutAdmin()" class="btn-logout">Chiqish</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <section class="admin-tab">
+                <header class="tab-header flex-header">
+                    <div>
+                        <h1>Darslar jadvallari</h1>
+                        <p>Yangi darslar qo'shing yoki mavjudlarini tahrirlang.</p>
+                    </div>
+                    <a href="admin-add-lesson.html" class="btn btn-primary">+ Yangi dars</a>
+                </header>
+
+                <div class="data-table-wrapper">
+                    <table id="lessons-table">
+                        <thead>
+                            <tr>
+                                <th>Dars sarlavhasi</th>
+                                <th>Manba</th>
+                                <th>Holat</th>
+                                <th>Amallar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-lessons-list">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/admin-lessons.js?v=10"></script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+[2026-02-26T15:14:14.045Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:59:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-26T15:14:28.286Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:14:35.455Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:14:28.286Z] FAILED TO SEND ALERT EMAIL: getaddrinfo ENOTFOUND smtp.example.com
+[2026-02-26T15:14:35.621Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:14:42.827Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:14:49.952Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:14:56.880Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:15:03.891Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:15:10.989Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:15:18.260Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:15:25.367Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:15:32.319Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:16:50.916Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:59:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-26T15:17:56.666Z] ERROR: SMTP delivery failed after 3 attempts to test@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:18:03.727Z] ERROR: SMTP delivery failed after 3 attempts to your_email@example.com
+Error: getaddrinfo ENOTFOUND smtp.example.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:120:26)
+
+[2026-02-26T15:17:56.666Z] FAILED TO SEND ALERT EMAIL: getaddrinfo ENOTFOUND smtp.example.com
+[2026-02-27T20:28:18.747Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T20:35:01.961Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T20:41:37.180Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T20:41:59.807Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T21:10:42.554Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T21:10:59.662Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T21:24:04.203Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T21:24:26.613Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T21:25:11.508Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T21:25:14.200Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-02-27T21:55:54.952Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:60:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+

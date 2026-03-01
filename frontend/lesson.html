@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dars Materiali - Feruza Channel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: 'Outfit', sans-serif;
+            color: #1e293b;
+        }
+
+        .lesson-header {
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lesson-header h1 {
+            font-size: 1.5rem;
+            color: #4F46E5;
+            margin: 0;
+        }
+
+        .lesson-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .lesson-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .video-player-wrapper {
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 16/9;
+            width: 100%;
+            position: relative;
+        }
+
+        .video-player-wrapper iframe,
+        .video-player-wrapper video {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .lesson-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            margin-top: 1.5rem;
+        }
+
+        .lesson-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .lesson-meta span {
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .lesson-description {
+            line-height: 1.7;
+            color: #475569;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .action-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .action-card h3 {
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .action-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #4F46E5 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-premium:disabled {
+            background: #cbd5e1;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Rating Section */
+        .rating-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            margin-top: 1.5rem;
+        }
+
+        .rating-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .star-rating .star {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #d1d5db;
+            transition: color 0.2s, transform 0.15s;
+        }
+
+        .star-rating .star:hover,
+        .star-rating .star.active {
+            color: #f59e0b;
+            transform: scale(1.15);
+        }
+
+        .rating-comment {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            resize: vertical;
+            min-height: 60px;
+            box-sizing: border-box;
+        }
+
+        .rating-comment:focus {
+            outline: none;
+            border-color: #4F46E5;
+        }
+
+        .rating-submit {
+            margin-top: 0.8rem;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .rating-submit:hover {
+            transform: translateY(-1px);
+        }
+
+        .rating-msg {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .rating-avg {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #fffbeb;
+            border-radius: 10px;
+        }
+
+        .rating-avg .big-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #d97706;
+        }
+
+        .reviews-list {
+            margin-top: 1rem;
+        }
+
+        .review-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .review-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .review-date {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        .review-stars {
+            color: #f59e0b;
+            font-size: 0.9rem;
+        }
+
+        .review-comment {
+            color: #475569;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="lesson-header">
+        <h1 style="cursor:pointer;" onclick="window.location.href='index.html'">Feruza Channel</h1>
+        <nav>
+            <a href="courses.html" style="color:#4F46E5; text-decoration:none; font-weight:600;">Darslarga Qaytish</a>
+        </nav>
+    </header>
+
+    <main class="lesson-container">
+        <!-- Left: Video & Details -->
+        <div class="main-column">
+            <div id="video-area" class="video-player-wrapper" style="display: none;">
+                <!-- YouTube or MP4 will be injected here -->
+            </div>
+
+            <div class="lesson-content animate">
+                <h2 id="lesson-title">Yuklanmoqda...</h2>
+                <div class="lesson-meta" id="lesson-meta">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="lesson-description" id="lesson-desc">
+                    Videoni yuklash va tayyorlash jarayoni ketmoqda...
+                </div>
+            </div>
+
+            <!-- Rating Section -->
+            <div class="rating-section" id="rating-section" style="display:none;">
+                <h3>⭐ Darsni baholang</h3>
+                <div class="rating-avg" id="rating-avg" style="display:none;">
+                    <span class="big-number" id="avg-rating-num">0.0</span>
+                    <span id="avg-rating-stars"></span>
+                    <span id="avg-rating-count" style="color:#6b7280;font-size:0.9rem;"></span>
+                </div>
+
+                <div class="star-rating" id="star-rating">
+                    <span class="star" data-value="1">☆</span>
+                    <span class="star" data-value="2">☆</span>
+                    <span class="star" data-value="3">☆</span>
+                    <span class="star" data-value="4">☆</span>
+                    <span class="star" data-value="5">☆</span>
+                </div>
+                <textarea class="rating-comment" id="rating-comment"
+                    placeholder="Izoh qoldiring (ixtiyoriy)..."></textarea>
+                <div>
+                    <button class="rating-submit" id="rating-submit-btn" onclick="submitRating()">Baholash</button>
+                    <div class="rating-msg" id="rating-msg"></div>
+                </div>
+
+                <div class="reviews-list" id="reviews-list"></div>
+            </div>
+        </div>
+
+        <!-- Right: Actions Sidebar -->
+        <div class="sidebar animate" style="animation-delay: 0.1s;">
+            <div class="action-card" id="auth-actions" style="display: none;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📄</div>
+                <h3>Dars Materiali</h3>
+                <p>Ushbu darsga biriktirilgan PDF qo'llanma va testlarni to'g'ridan-to'g'ri elektron pochtangizga qabul
+                    qiling.</p>
+                <button id="send-pdf-btn" class="btn-premium">PDF ni Jo'natish</button>
+                <div id="request-status" style="margin-top: 1rem; font-weight: 600; font-size: 0.9rem;"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        const CURRENT_API_URL = 'http://localhost:5000/api';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!requireAuth()) return;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const lessonId = urlParams.get('id');
+
+            if (lessonId) {
+                fetchLessonDetails(lessonId).then(() => {
+                    document.getElementById('auth-actions').style.display = 'block';
+                });
+
+                document.getElementById('send-pdf-btn').addEventListener('click', () => sendPdfToEmail(lessonId));
+            } else {
+                document.getElementById('lesson-title').innerText = 'Dars topilmadi';
+                document.getElementById('lesson-desc').innerText = 'Iltimos, darslar ro\'yxatidan darsni tanlab ulaning.';
+            }
+        });
+
+        function getEmbedUrl(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : null;
+        }
+
+        async function fetchLessonDetails(id) {
+            try {
+                const response = await fetch(`${CURRENT_API_URL}/lessons/${id}`);
+                if (!response.ok) throw new Error('Dars topilmadi yoki tarmoqda xatolik.');
+
+                const lesson = await response.json();
+
+                document.getElementById('lesson-title').innerText = lesson.title;
+                document.title = `${lesson.title} - Feruza Channel`;
+                document.getElementById('lesson-desc').innerText = lesson.description || "Ushbu dars uchun qo'shimcha ta'rif kiritilmagan.";
+
+                const metaContainer = document.getElementById('lesson-meta');
+                metaContainer.innerHTML = '';
+                if (lesson.category) metaContainer.innerHTML += `<span style="color:#e63946;">${lesson.category}</span>`;
+                if (lesson.duration) metaContainer.innerHTML += `<span>⏱ ${lesson.duration}</span>`;
+                if (lesson.created_at) metaContainer.innerHTML += `<span>📅 ${new Date(lesson.created_at).toLocaleDateString()}</span>`;
+
+                const videoArea = document.getElementById('video-area');
+
+                if (lesson.youtube_url) {
+                    const embedUrl = getEmbedUrl(lesson.youtube_url);
+                    if (embedUrl) {
+                        videoArea.innerHTML = `<iframe src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                        videoArea.style.display = 'block';
+                    }
+                } else if (lesson.video_path) {
+                    const formattedPath = lesson.video_path.replace(/\\/g, '/');
+                    const videoUrl = `http://localhost:5000/${formattedPath}`;
+
+                    videoArea.innerHTML = `
+                        <video id="native-player" controls controlsList="nodownload" style="width: 100%; height: 100%; display:block; background:#000;">
+                        </video>
+                    `;
+                    videoArea.style.display = 'block';
+
+                    const player = document.getElementById('native-player');
+                    player.src = videoUrl;
+                    player.load();
+                }
+            } catch (error) {
+                document.getElementById('lesson-title').innerText = 'Dars topilmadi';
+                document.getElementById('lesson-desc').innerHTML = `<p style="color: red;">${error.message}</p>`;
+                throw error;
+            }
+        }
+
+        async function sendPdfToEmail(lessonId) {
+            const status = document.getElementById('request-status');
+            const btn = document.getElementById('send-pdf-btn');
+            const token = getAuthToken();
+
+            status.innerText = 'Yozib olinmoqda va emailga yuborilmoqda, kuting...';
+            status.style.color = 'blue';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${CURRENT_API_URL}/lessons/${lessonId}/send-to-email`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const result = await response.json();
+
+                if (response.ok) {
+                    status.style.color = 'green';
+                    status.innerText = result.message || 'Muvaffaqiyatli jo\'natildi!';
+                } else {
+                    status.style.color = 'red';
+                    status.innerText = result.error || 'Xato yuz berdi';
+
+                    if (response.status === 401) {
+                        setTimeout(() => { logout(); }, 2000);
+                    }
+                }
+            } catch (error) {
+                status.innerText = 'Serverga bog\'lanishda xatolik.';
+                status.style.color = 'red';
+            } finally {
+                btn.disabled = false;
+            }
+        }
+    </script>
+    <script>
+        // ======= Rating System =======
+        let selectedRating = 0;
+        let currentLessonId = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentLessonId = urlParams.get('id');
+
+            // Star click handlers
+            document.querySelectorAll('#star-rating .star').forEach(star => {
+                star.addEventListener('click', function () {
+                    selectedRating = parseInt(this.dataset.value);
+                    updateStars(selectedRating);
+                });
+                star.addEventListener('mouseenter', function () {
+                    updateStars(parseInt(this.dataset.value));
+                });
+            });
+
+            document.getElementById('star-rating').addEventListener('mouseleave', () => {
+                updateStars(selectedRating);
+            });
+
+            if (currentLessonId) {
+                // Show rating section after a small delay
+                setTimeout(() => {
+                    document.getElementById('rating-section').style.display = 'block';
+                    loadRatings(currentLessonId);
+                }, 500);
+            }
+        });
+
+        function updateStars(value) {
+            document.querySelectorAll('#star-rating .star').forEach(star => {
+                const v = parseInt(star.dataset.value);
+                if (v <= value) {
+                    star.classList.add('active');
+                    star.textContent = '★';
+                } else {
+                    star.classList.remove('active');
+                    star.textContent = '☆';
+                }
+            });
+        }
+
+        async function submitRating() {
+            if (!selectedRating) {
+                document.getElementById('rating-msg').innerText = 'Iltimos yulduzcha tanlang!';
+                document.getElementById('rating-msg').style.color = 'red';
+                return;
+            }
+
+            const token = getAuthToken();
+            if (!token) {
+                document.getElementById('rating-msg').innerText = 'Tizimga kiring';
+                document.getElementById('rating-msg').style.color = 'red';
+                return;
+            }
+
+            const comment = document.getElementById('rating-comment').value;
+            const msg = document.getElementById('rating-msg');
+            msg.innerText = 'Saqlanmoqda...';
+            msg.style.color = 'blue';
+
+            try {
+                const res = await fetch(`${CURRENT_API_URL}/lessons/${currentLessonId}/rate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ rating: selectedRating, comment })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    msg.innerText = '✅ Reyting saqlandi!';
+                    msg.style.color = 'green';
+                    loadRatings(currentLessonId);
+                } else {
+                    msg.innerText = data.error || 'Xatolik';
+                    msg.style.color = 'red';
+                }
+            } catch (e) {
+                msg.innerText = 'Server xatosi';
+                msg.style.color = 'red';
+            }
+        }
+
+        async function loadRatings(lessonId) {
+            try {
+                const res = await fetch(`${CURRENT_API_URL}/lessons/${lessonId}/ratings`);
+                if (!res.ok) return;
+
+                const data = await res.json();
+
+                // Show average
+                if (data.total > 0) {
+                    document.getElementById('rating-avg').style.display = 'flex';
+                    document.getElementById('avg-rating-num').innerText = data.average;
+
+                    let stars = '';
+                    for (let i = 1; i <= 5; i++) stars += i <= Math.round(data.average) ? '⭐' : '☆';
+                    document.getElementById('avg-rating-stars').innerText = stars;
+                    document.getElementById('avg-rating-count').innerText = `(${data.total} ta baho)`;
+                }
+
+                // Show reviews
+                const list = document.getElementById('reviews-list');
+                if (data.ratings && data.ratings.length > 0) {
+                    list.innerHTML = '<h4 style="margin-top:1rem;margin-bottom:0.5rem;">Izohlar</h4>' +
+                        data.ratings.map(r => {
+                            let stars = '';
+                            for (let i = 1; i <= 5; i++) stars += i <= r.rating ? '⭐' : '☆';
+                            return `
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <span class="review-name">${r.full_name || 'Foydalanuvchi'}</span>
+                                    <span class="review-date">${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}</span>
+                                </div>
+                                <div class="review-stars">${stars}</div>
+                                ${r.comment ? `<div class="review-comment">${r.comment}</div>` : ''}
+                            </div>`;
+                        }).join('');
+                }
+            } catch (e) { }
+        }
+    </script>
+</body>
+
+</html>

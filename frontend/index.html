@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feruza Channel - Japanese Lessons</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="container">
+            <div class="logo">Feruza <span class="accent">Channel</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Bosh sahifa</a></li>
+                <li><a href="courses.html">Kurslar</a></li>
+                <li><a href="contact.html">Aloqa</a></li>
+            </ul>
+            <a href="register.html" id="auth-nav-btn" class="btn btn-nav">Ro'yxatdan o'tish</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content animate text-left">
+                <img src="assets/wavy.svg" alt="" class="decoration wavy-top">
+                <h1 class="hero-title">Bilim olish uchun <br><span class="accent">Eng yaxshi platforma</span></h1>
+                <p class="hero-subtitle">Yapon tilini mutaxassis bilan noldan boshlab o'rganing. Dars materiallari va
+                    qo'llab-quvvatlash tizimi bilan natijaga tezroq erishing.</p>
+                <div class="hero-search-cta">
+                    <div class="search-input-wrapper">
+                        <i class="icon-search gold"></i>
+                        <input type="text" placeholder="Nimalarni o'rganmoqchisiz?" class="hero-input">
+                    </div>
+                    <button class="btn btn-primary">Kursni qidirish</button>
+                </div>
+                <img src="assets/wavy.svg" alt="" class="decoration wavy-bottom">
+            </div>
+            <div class="hero-images animate">
+                <div class="image-stack">
+                    <div class="image-wrapper main-img">
+                        <img src="assets/student1.png" alt="Student studying" class="floating-img-1">
+                    </div>
+                    <div class="image-wrapper sub-img">
+                        <img src="assets/student2.png" alt="Student" class="floating-img-2">
+                    </div>
+                    <div class="badge-card badge-1">
+                        <div class="badge-icon purple">✓</div>
+                        <p>Har qanday daraja uchun</p>
+                    </div>
+                    <div class="badge-card badge-2">
+                        <div class="badge-icon purple">✓</div>
+                        <p>Tajribali ustozlar</p>
+                    </div>
+                    <img src="assets/wavy.svg" alt="" class="decoration wavy-image-top">
+                    <img src="assets/wavy.svg" alt="" class="decoration wavy-image-bottom">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="lessons" class="animate">
+            <div class="section-header">
+                <h2>Bizning ommabop <span class="accent">kurslarimiz</span></h2>
+                <p>O'zingizga kerakli bo'limni tanlang va o'rganishni boshlang.</p>
+            </div>
+            <div id="lessons-list" class="lesson-grid">
+                <!-- Lessons will be loaded by JS -->
+                <div style="text-align: center; grid-column: 1/-1;">Yuklanmoqda...</div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Feruza <span class="accent">Channel</span></div>
+            <p>&copy; 2026 Feruza Channel. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const authBtn = document.getElementById('auth-nav-btn');
+            if (getAuthToken()) {
+                authBtn.href = "profile.html";
+                authBtn.innerText = "Kabinet";
+            }
+        });
+    </script>
+</body>
+
+</html>
