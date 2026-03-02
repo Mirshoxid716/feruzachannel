@@ -1,6 +1,6 @@
 const API_BASE = window.APP_CONFIG.API_URL;
 const ADMIN_API = `${API_BASE}/admin`;
-const ADMIN_AUTH_API = `${API_BASE}/auth`;
+const ADMIN_AUTH_API = `${API_BASE}/admin-auth`;
 
 let adminToken = localStorage.getItem('admin_token') || '';
 let currentAdmin = JSON.parse(localStorage.getItem('admin_info') || 'null');

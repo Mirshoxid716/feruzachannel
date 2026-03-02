@@ -504,3 +504,91 @@ AggregateError [ECONNREFUSED]:
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async initializeSchema (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\db\database.js:22:18)
 
+[2026-03-02T13:11:03.633Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:108:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-03-02T13:11:03.641Z] ERROR: CRITICAL: Unhandled Rejection
+AggregateError [ECONNREFUSED]: 
+    at C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async initializeSchema (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\db\database.js:22:18)
+
+[2026-03-02T13:11:03.659Z] ERROR: CRITICAL: Unhandled Rejection
+AggregateError [ECONNREFUSED]: 
+    at C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async initializeSchema (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\db\database.js:22:18)
+
+[2026-03-02T13:11:03.877Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:108:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-03-02T13:11:03.889Z] ERROR: CRITICAL: Unhandled Rejection
+AggregateError [ECONNREFUSED]: 
+    at C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async initializeSchema (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\db\database.js:22:18)
+
+[2026-03-02T13:11:06.172Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:108:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-03-02T13:11:06.182Z] ERROR: CRITICAL: Unhandled Rejection
+AggregateError [ECONNREFUSED]: 
+    at C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async initializeSchema (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\db\database.js:22:18)
+
+[2026-03-02T13:11:06.184Z] ERROR: CRITICAL: Uncaught Exception
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\index.js:108:5)
+    at Module._compile (node:internal/modules/cjs/loader:1562:14)
+    at Object..js (node:internal/modules/cjs/loader:1699:10)
+    at Module.load (node:internal/modules/cjs/loader:1313:32)
+    at Function._load (node:internal/modules/cjs/loader:1123:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+
+[2026-03-02T13:11:06.190Z] ERROR: CRITICAL: Unhandled Rejection
+AggregateError [ECONNREFUSED]: 
+    at C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async initializeSchema (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\db\database.js:22:18)
+
+[2026-03-02T13:11:06.204Z] ERROR: CRITICAL: Unhandled Rejection
+AggregateError [ECONNREFUSED]: 
+    at C:\Users\Mirshoxid\Desktop\feruzachannel\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async initializeSchema (C:\Users\Mirshoxid\Desktop\feruzachannel\backend\src\db\database.js:22:18)
+

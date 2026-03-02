@@ -94,16 +94,17 @@ async function initializeSchema() {
 
     // Seed Superuser if not exists
     const adminUsername = 'feruzachanel';
-    const { rows } = await client.query('SELECT id FROM admins WHERE username = $1', [adminUsername]);
+    const adminEmail = 'admin@feruza.uz';
+    const hashedPassword = await bcrypt.hash('admin123', 10);
 
-    if (rows.length === 0) {
-      const hashedPassword = await bcrypt.hash('admin123', 10);
-      await client.query(
-        'INSERT INTO admins (username, email, password_hash, role, permissions) VALUES ($1, $2, $3, $4, $5)',
-        [adminUsername, 'admin@feruza.uz', hashedPassword, 'superuser', JSON.stringify({ all: true })]
-      );
-      console.log('Default superuser created: feruzachanel / admin123');
-    }
+    await client.query(`
+      INSERT INTO admins (username, email, password_hash, role, permissions) 
+      VALUES ($1, $2, $3, $4, $5) 
+      ON CONFLICT (email) 
+      DO UPDATE SET username = EXCLUDED.username, password_hash = EXCLUDED.password_hash
+    `, [adminUsername, adminEmail, hashedPassword, 'superuser', JSON.stringify({ all: true })]);
+
+    console.log('Superuser sync completed: feruzachanel / admin123');
 
     await client.query('COMMIT');
     console.log('Database schema initialized and seeded successfully.');
