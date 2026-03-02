@@ -1,48 +1,53 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+const { Pool } = require('pg');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const dbPath = path.resolve(__dirname, '../../database.sqlite');
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error('Database connection error:', err.message);
-  } else {
-    console.log('Connected to SQLite database.');
-    initializeSchema();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
 });
 
-function initializeSchema() {
-  db.serialize(() => {
+pool.on('connect', () => {
+  console.log('Connected to PostgreSQL database (Supabase).');
+});
+
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client', err);
+});
+
+async function initializeSchema() {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
     // Users Table
-    db.run(`CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+    await client.query(`CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
             full_name TEXT NOT NULL,
             email TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL,
             is_active INTEGER DEFAULT 1,
-            last_login DATETIME,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            last_login TIMESTAMP,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`);
 
-    // Add columns if they don't exist (for existing databases)
-    db.run(`ALTER TABLE users ADD COLUMN is_active INTEGER DEFAULT 1`, () => { });
-    db.run(`ALTER TABLE users ADD COLUMN last_login DATETIME`, () => { });
-
     // Admins Table
-    db.run(`CREATE TABLE IF NOT EXISTS admins (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+    await client.query(`CREATE TABLE IF NOT EXISTS admins (
+      id SERIAL PRIMARY KEY,
       username TEXT NOT NULL,
       email TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       role TEXT NOT NULL DEFAULT 'admin',
-      permissions TEXT DEFAULT '{}',
+      permissions JSONB DEFAULT '{}',
       avatar_url TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       created_by INTEGER
     )`);
 
     // Lessons Table
-    db.run(`CREATE TABLE IF NOT EXISTS lessons (
+    await client.query(`CREATE TABLE IF NOT EXISTS lessons (
       id TEXT PRIMARY KEY,
       title TEXT NOT NULL,
       description TEXT,
@@ -53,42 +58,53 @@ function initializeSchema() {
       thumbnail_path TEXT,
       file_path TEXT NOT NULL,
       is_active INTEGER DEFAULT 1,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
 
     // Ratings Table
-    db.run(`CREATE TABLE IF NOT EXISTS ratings (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id INTEGER NOT NULL,
-      lesson_id TEXT NOT NULL,
+    await client.query(`CREATE TABLE IF NOT EXISTS ratings (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER NOT NULL REFERENCES users(id),
+      lesson_id TEXT NOT NULL REFERENCES lessons(id),
       rating INTEGER NOT NULL CHECK(rating >= 1 AND rating <= 5),
       comment TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (lesson_id) REFERENCES lessons(id),
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       UNIQUE(user_id, lesson_id)
     )`);
 
     // Verification Tokens Table
-    db.run(`CREATE TABLE IF NOT EXISTS verification_tokens (
+    await client.query(`CREATE TABLE IF NOT EXISTS verification_tokens (
       token TEXT PRIMARY KEY,
       email TEXT NOT NULL,
-      lesson_id TEXT,
-      expires_at DATETIME NOT NULL,
-      used INTEGER DEFAULT 0,
-      FOREIGN KEY (lesson_id) REFERENCES lessons(id)
+      lesson_id TEXT REFERENCES lessons(id),
+      expires_at TIMESTAMP NOT NULL,
+      used INTEGER DEFAULT 0
     )`);
 
     // Contact Messages Table
-    db.run(`CREATE TABLE IF NOT EXISTS contact_messages (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+    await client.query(`CREATE TABLE IF NOT EXISTS contact_messages (
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       email TEXT NOT NULL,
       subject TEXT,
       message TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
-  });
+
+    await client.query('COMMIT');
+    console.log('Database schema initialized successfully.');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error initializing schema:', err);
+  } finally {
+    client.release();
+  }
 }
 
-module.exports = db;
+// Initialize schema on load
+initializeSchema();
+
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+  pool: pool
+};

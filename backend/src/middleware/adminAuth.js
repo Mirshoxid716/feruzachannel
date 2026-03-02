@@ -13,7 +13,7 @@ function generateAdminToken(admin) {
 }
 
 // Verify admin JWT token
-function verifyAdminToken(req, res, next) {
+async function verifyAdminToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
 
@@ -25,14 +25,15 @@ function verifyAdminToken(req, res, next) {
         const decoded = jwt.verify(token, JWT_SECRET);
 
         // Verify admin still exists in DB
-        db.get('SELECT id, username, email, role, permissions FROM admins WHERE id = ?', [decoded.id], (err, admin) => {
-            if (err) return res.status(500).json({ error: 'Server xatosi' });
-            if (!admin) return res.status(401).json({ error: 'Admin topilmadi' });
+        const { rows } = await db.query('SELECT id, username, email, role, permissions FROM admins WHERE id = $1', [decoded.id]);
+        const admin = rows[0];
 
-            req.admin = admin;
-            req.admin.permissions = JSON.parse(admin.permissions || '{}');
-            next();
-        });
+        if (!admin) return res.status(401).json({ error: 'Admin topilmadi' });
+
+        req.admin = admin;
+        // permissions is JSONB, so it's already an object
+        req.admin.permissions = admin.permissions || {};
+        next();
     } catch (err) {
         return res.status(401).json({ error: 'Token yaroqsiz yoki muddati tugagan' });
     }

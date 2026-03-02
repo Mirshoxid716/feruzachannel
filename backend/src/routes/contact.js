@@ -4,36 +4,38 @@ const db = require('../db/database');
 const { sendEmail } = require('../services/emailService');
 
 // Contact Form Submission
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const { name, email, subject, message } = req.body;
 
     if (!name || !email || !message) {
         return res.status(400).json({ error: 'Ism, Email va Xabar bo\'lishi shart' });
     }
 
-    db.run(
-        'INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)',
-        [name, email, subject, message],
-        async function (err) {
-            if (err) return res.status(500).json({ error: err.message });
+    try {
+        await db.query(
+            'INSERT INTO contact_messages (name, email, subject, message) VALUES ($1, $2, $3, $4)',
+            [name, email, subject, message]
+        );
 
-            try {
-                // Notify Admin
-                await sendEmail(
-                    process.env.SMTP_USER, // Send to admin
-                    `Yangi kontakt xabari: ${subject || 'Mavzusiz'}`,
-                    `<p><strong>Ism:</strong> ${name}</p>
-           <p><strong>Email:</strong> ${email}</p>
-           <p><strong>Xabar:</strong> ${message}</p>`
-                );
-
-                res.json({ message: 'Xabaringiz yuborildi. Rahmat!' });
-            } catch (sendErr) {
-                // Even if email fails, message is saved in DB
-                res.json({ message: 'Xabaringiz saqlandi, lekin adminni xabardor qilishda xatolik yuz berdi.' });
-            }
+        try {
+            // Notify Admin
+            await sendEmail(
+                process.env.SMTP_USER, // Send to admin
+                `Yangi kontakt xabari: ${subject || 'Mavzusiz'}`,
+                `<p><strong>Ism:</strong> ${name}</p>
+                 <p><strong>Email:</strong> ${email}</p>
+                 <p><strong>Xabar:</strong> ${message}</p>`
+            );
+        } catch (sendErr) {
+            console.error("Admin notification failed:", sendErr);
         }
-    );
+
+        res.json({ message: 'Xabaringiz yuborildi. Rahmat!' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
+
+module.exports = router;
 
 module.exports = router;

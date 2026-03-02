@@ -2,107 +2,102 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const db = require('../db/database');
-const { generateRandomString } = require('../utils/crypto');
 const { sendEmail } = require('../services/emailService');
 
 // Get all active lessons
-router.get('/', (req, res) => {
-    db.all('SELECT id, title, description, category, duration, youtube_url, video_path, thumbnail_path FROM lessons WHERE is_active = 1', [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
+router.get('/', async (req, res) => {
+    try {
+        const { rows } = await db.query('SELECT id, title, description, category, duration, youtube_url, video_path, thumbnail_path FROM lessons WHERE is_active = 1');
         res.json(rows);
-    });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
-// Get a specific lesson by ID (Magic Link)
-router.get('/:id', (req, res) => {
+// Get a specific lesson by ID
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    db.get('SELECT * FROM lessons WHERE id = ? AND is_active = 1', [id], (err, row) => {
-        if (err) return res.status(500).json({ error: err.message });
-        if (!row) return res.status(404).json({ error: 'Lesson not found' });
-        res.json(row);
-    });
+    try {
+        const { rows } = await db.query('SELECT * FROM lessons WHERE id = $1 AND is_active = 1', [id]);
+        if (rows.length === 0) return res.status(404).json({ error: 'Lesson not found' });
+        res.json(rows[0]);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 // Direct send PDF to user's email
 router.post('/:id/send-to-email', async (req, res) => {
     const { id } = req.params;
-    // Tizimga kirish tokenni Header-dan olamiz. Biz authentication uchun base64 token qildik.
-    const token = req.headers['authorization'];
+    const authHeader = req.headers['authorization'];
 
-    if (!token) return res.status(401).json({ error: 'Tizimga kirmagansiz' });
+    if (!authHeader) return res.status(401).json({ error: 'Tizimga kirmagansiz' });
 
     try {
-        const decoded = Buffer.from(token.split(' ')[1] || token, 'base64').toString('ascii');
+        const token = authHeader.split(' ')[1] || authHeader;
+        const decoded = Buffer.from(token, 'base64').toString('ascii');
         const [userId, userEmail] = decoded.split(':');
 
         if (!userEmail) return res.status(401).json({ error: "Noto'g'ri token" });
 
-        // Darsni topamiz
-        db.get('SELECT * FROM lessons WHERE id = ? AND is_active = 1', [id], async (err, lesson) => {
-            if (err) return res.status(500).json({ error: err.message });
-            if (!lesson) return res.status(404).json({ error: 'Dars topilmadi' });
+        const { rows } = await db.query('SELECT * FROM lessons WHERE id = $1 AND is_active = 1', [id]);
+        const lesson = rows[0];
 
-            try {
-                // Email yuborish
-                await sendEmail(
-                    userEmail,
-                    `${lesson.title} - Dars materiali`,
-                    `<p>Siz so'ragan <b>${lesson.title}</b> darsi bo'yicha material biriktirildi. O'qishlaringizda omad!</p>`,
-                    [{ filename: path.basename(lesson.file_path), path: lesson.file_path }]
-                );
+        if (!lesson) return res.status(404).json({ error: 'Dars topilmadi' });
 
-                res.json({ message: "PDF pochta manzilingizga muvaffaqiyatli jo'natildi!" });
-            } catch (sendErr) {
-                console.error("Email send error:", sendErr);
-                res.status(500).json({ error: "Email yuborishda xatolik yuz berdi" });
-            }
-        });
+        await sendEmail(
+            userEmail,
+            `${lesson.title} - Dars materiali`,
+            `<p>Siz so'ragan <b>${lesson.title}</b> darsi bo'yicha material biriktirildi. O'qishlaringizda omad!</p>`,
+            [{ filename: path.basename(lesson.file_path), path: lesson.file_path }]
+        );
+
+        res.json({ message: "PDF pochta manzilingizga muvaffaqiyatli jo'natildi!" });
     } catch (error) {
-        res.status(401).json({ error: 'Token xatosi' });
+        console.error("Email send error:", error);
+        res.status(500).json({ error: "Xatolik yuz berdi" });
     }
 });
 
 // Verify token and send material
-router.get('/verify/:token', (req, res) => {
+router.get('/verify/:token', async (req, res) => {
     const { token } = req.params;
 
-    db.get(
-        'SELECT vt.*, l.title, l.file_path FROM verification_tokens vt JOIN lessons l ON vt.lesson_id = l.id WHERE vt.token = ? AND vt.used = 0 AND vt.expires_at > ?',
-        [token, new Date().toISOString()],
-        async (err, row) => {
-            if (err) return res.status(500).json({ error: err.message });
-            if (!row) return res.status(400).json({ error: 'Yaroqsiz yoki muddati o\'tgan token.' });
+    try {
+        const { rows } = await db.query(
+            'SELECT vt.*, l.title, l.file_path FROM verification_tokens vt JOIN lessons l ON vt.lesson_id = l.id WHERE vt.token = $1 AND vt.used = 0 AND vt.expires_at > NOW()',
+            [token]
+        );
+        const row = rows[0];
 
-            try {
-                // Mark token as used
-                db.run('UPDATE verification_tokens SET used = 1 WHERE token = ?', [token]);
+        if (!row) return res.status(400).json({ error: 'Yaroqsiz yoki muddati o\'tgan token.' });
 
-                // Send file via SMTP
-                await sendEmail(
-                    row.email,
-                    `${row.title} - Dars materiali`,
-                    `<p>Tabriklaymiz! Mana siz so'ragan dars materiali.</p>`,
-                    [{ filename: path.basename(row.file_path), path: row.file_path }]
-                );
+        await db.query('UPDATE verification_tokens SET used = 1 WHERE token = $1', [token]);
 
-                res.json({ message: 'Material pochtangizga yuborildi!' });
-            } catch (sendErr) {
-                res.status(500).json({ error: 'Materialni yuborishda xatolik yuz berdi.' });
-            }
-        }
-    );
+        await sendEmail(
+            row.email,
+            `${row.title} - Dars materiali`,
+            `<p>Tabriklaymiz! Mana siz so'ragan dars materiali.</p>`,
+            [{ filename: path.basename(row.file_path), path: row.file_path }]
+        );
+
+        res.json({ message: 'Material pochtangizga yuborildi!' });
+    } catch (err) {
+        res.status(500).json({ error: 'Materialni yuborishda xatolik yuz berdi.' });
+    }
 });
 
 // ======= Rate a Lesson =======
-router.post('/:id/rate', (req, res) => {
+router.post('/:id/rate', async (req, res) => {
     const { id } = req.params;
     const { rating, comment } = req.body;
-    const token = req.headers['authorization'];
+    const authHeader = req.headers['authorization'];
 
-    if (!token) return res.status(401).json({ error: 'Tizimga kirmagansiz' });
+    if (!authHeader) return res.status(401).json({ error: 'Tizimga kirmagansiz' });
 
     try {
-        const decoded = Buffer.from(token.split(' ')[1] || token, 'base64').toString('ascii');
+        const token = authHeader.split(' ')[1] || authHeader;
+        const decoded = Buffer.from(token, 'base64').toString('ascii');
         const [userId] = decoded.split(':');
 
         if (!userId) return res.status(401).json({ error: "Noto'g'ri token" });
@@ -110,47 +105,42 @@ router.post('/:id/rate', (req, res) => {
             return res.status(400).json({ error: 'Reyting 1 dan 5 gacha bo\'lishi kerak' });
         }
 
-        // Check if lesson exists
-        db.get('SELECT id FROM lessons WHERE id = ? AND is_active = 1', [id], (err, lesson) => {
-            if (err) return res.status(500).json({ error: err.message });
-            if (!lesson) return res.status(404).json({ error: 'Dars topilmadi' });
+        const lessonCheck = await db.query('SELECT id FROM lessons WHERE id = $1 AND is_active = 1', [id]);
+        if (lessonCheck.rows.length === 0) return res.status(404).json({ error: 'Dars topilmadi' });
 
-            // Insert or update rating (UNIQUE constraint on user_id + lesson_id)
-            db.run(
-                `INSERT INTO ratings (user_id, lesson_id, rating, comment) VALUES (?, ?, ?, ?)
-                 ON CONFLICT(user_id, lesson_id) DO UPDATE SET rating = ?, comment = ?, created_at = CURRENT_TIMESTAMP`,
-                [userId, id, rating, comment || '', rating, comment || ''],
-                function (err) {
-                    if (err) return res.status(500).json({ error: err.message });
-                    res.json({ message: 'Reyting muvaffaqiyatli saqlandi', id: this.lastID });
-                }
-            );
-        });
+        await db.query(
+            `INSERT INTO ratings (user_id, lesson_id, rating, comment) VALUES ($1, $2, $3, $4)
+             ON CONFLICT(user_id, lesson_id) DO UPDATE SET rating = $3, comment = $4, created_at = CURRENT_TIMESTAMP`,
+            [userId, id, rating, comment || '']
+        );
+        res.json({ message: 'Reyting muvaffaqiyatli saqlandi' });
     } catch (error) {
-        res.status(401).json({ error: 'Token xatosi' });
+        res.status(500).json({ error: error.message });
     }
 });
 
 // ======= Get Ratings for a Lesson =======
-router.get('/:id/ratings', (req, res) => {
+router.get('/:id/ratings', async (req, res) => {
     const { id } = req.params;
 
-    db.all(
-        `SELECT r.rating, r.comment, r.created_at, u.full_name
-         FROM ratings r LEFT JOIN users u ON r.user_id = u.id
-         WHERE r.lesson_id = ? ORDER BY r.created_at DESC`,
-        [id],
-        (err, rows) => {
-            if (err) return res.status(500).json({ error: err.message });
+    try {
+        const { rows } = await db.query(
+            `SELECT r.rating, r.comment, r.created_at, u.full_name
+             FROM ratings r LEFT JOIN users u ON r.user_id = u.id
+             WHERE r.lesson_id = $1 ORDER BY r.created_at DESC`,
+            [id]
+        );
 
-            // Calculate average
-            const avg = rows.length > 0
-                ? (rows.reduce((sum, r) => sum + r.rating, 0) / rows.length).toFixed(1)
-                : '0.0';
+        const avg = rows.length > 0
+            ? (rows.reduce((sum, r) => sum + r.rating, 0) / rows.length).toFixed(1)
+            : '0.0';
 
-            res.json({ ratings: rows, average: parseFloat(avg), total: rows.length });
-        }
-    );
+        res.json({ ratings: rows, average: parseFloat(avg), total: rows.length });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
+
+module.exports = router;
 
 module.exports = router;
