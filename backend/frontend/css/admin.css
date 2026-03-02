@@ -81,6 +81,33 @@
     margin-top: 1rem;
 }
 
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    padding-right: 3.5rem !important;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1.2rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.1rem;
+    color: #9ca3af;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password:hover {
+    color: var(--admin-primary);
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;

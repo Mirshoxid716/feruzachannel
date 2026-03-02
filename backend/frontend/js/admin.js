@@ -30,6 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add admin form
     const addAdminForm = document.getElementById('add-admin-form');
     if (addAdminForm) addAdminForm.addEventListener('submit', createAdmin);
+
+    // Password Toggle
+    const togglePass = document.getElementById('toggle-password');
+    if (togglePass) {
+        togglePass.addEventListener('click', function () {
+            const passInput = document.getElementById('admin-password-input');
+            const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🔒';
+        });
+    }
 });
 
 // ======================================

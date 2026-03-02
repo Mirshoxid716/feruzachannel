@@ -58,6 +58,14 @@ app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Disable caching for admin related files
+app.use((req, res, next) => {
+    if (req.url.includes('/admin') || req.url.includes('.js')) {
+        res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    }
+    next();
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
