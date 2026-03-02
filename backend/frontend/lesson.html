@@ -344,7 +344,8 @@
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
     <script>
-        const CURRENT_API_URL = 'http://localhost:5000/api';
+        const API_BASE = window.APP_CONFIG ? window.APP_CONFIG.API_URL : 'http://localhost:5000/api';
+        const FILE_BASE = window.APP_CONFIG ? window.APP_CONFIG.BASE_URL : 'http://localhost:5000';
 
         document.addEventListener('DOMContentLoaded', () => {
             if (!requireAuth()) return;
@@ -359,12 +360,17 @@
 
                 document.getElementById('send-pdf-btn').addEventListener('click', () => sendPdfToEmail(lessonId));
             } else {
-                document.getElementById('lesson-title').innerText = 'Dars topilmadi';
-                document.getElementById('lesson-desc').innerText = 'Iltimos, darslar ro\'yxatidan darsni tanlab ulaning.';
+                showError('Dars topilmadi', 'Iltimos, darslar ro\'yxatidan darsni tanlab ulaning.');
             }
         });
 
+        function showError(title, message) {
+            document.getElementById('lesson-title').innerText = title;
+            document.getElementById('lesson-desc').innerHTML = `<p style="color: red;">${message}</p>`;
+        }
+
         function getEmbedUrl(url) {
+            if (!url) return null;
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : null;
@@ -372,8 +378,11 @@
 
         async function fetchLessonDetails(id) {
             try {
-                const response = await fetch(`${CURRENT_API_URL}/lessons/${id}`);
-                if (!response.ok) throw new Error('Dars topilmadi yoki tarmoqda xatolik.');
+                const response = await fetch(`${API_BASE}/lessons/${id}`);
+                if (!response.ok) {
+                    if (response.status === 404) throw new Error('Dars topilmadi.');
+                    throw new Error('Tarmoqda xatolik yuz berdi.');
+                }
 
                 const lesson = await response.json();
 
@@ -389,6 +398,7 @@
 
                 const videoArea = document.getElementById('video-area');
 
+                // Handle Video
                 if (lesson.youtube_url) {
                     const embedUrl = getEmbedUrl(lesson.youtube_url);
                     if (embedUrl) {
@@ -397,22 +407,47 @@
                     }
                 } else if (lesson.video_path) {
                     const formattedPath = lesson.video_path.replace(/\\/g, '/');
-                    const videoUrl = `http://localhost:5000/${formattedPath}`;
+                    const videoUrl = `${FILE_BASE}/${formattedPath}`;
 
                     videoArea.innerHTML = `
                         <video id="native-player" controls controlsList="nodownload" style="width: 100%; height: 100%; display:block; background:#000;">
+                            <source src="${videoUrl}" type="video/mp4">
+                            Sizning brauzeringiz videoni qo'llab-quvvatlamaydi.
                         </video>
                     `;
                     videoArea.style.display = 'block';
 
                     const player = document.getElementById('native-player');
-                    player.src = videoUrl;
                     player.load();
                 }
+
+                // Handle PDF Material Preview
+                if (lesson.file_path) {
+                    const formattedFilePath = lesson.file_path.replace(/\\/g, '/');
+                    const pdfUrl = `${FILE_BASE}/${formattedFilePath}`;
+
+                    // Add PDF Preview to Sidebar or below content
+                    const mainColumn = document.querySelector('.main-column');
+                    const pdfSection = document.createElement('div');
+                    pdfSection.className = 'lesson-content animate';
+                    pdfSection.style.marginTop = '1.5rem';
+                    pdfSection.innerHTML = `
+                        <h3 style="margin-bottom: 1rem;">📄 Dars Materiali (PDF)</h3>
+                        <div style="width: 100%; height: 600px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;">
+                            <iframe src="${pdfUrl}#toolbar=0" width="100%" height="100%" style="border: none;"></iframe>
+                        </div>
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <a href="${pdfUrl}" target="_blank" class="btn btn-primary" style="text-decoration: none; display: inline-block; padding: 0.5rem 1rem;">
+                                To'liq oynada ochish
+                            </a>
+                        </div>
+                    `;
+                    mainColumn.appendChild(pdfSection);
+                }
+
             } catch (error) {
-                document.getElementById('lesson-title').innerText = 'Dars topilmadi';
-                document.getElementById('lesson-desc').innerHTML = `<p style="color: red;">${error.message}</p>`;
-                throw error;
+                showError('Xatolik', error.message);
+                console.error("Fetch error:", error);
             }
         }
 
@@ -426,7 +461,7 @@
             btn.disabled = true;
 
             try {
-                const response = await fetch(`${CURRENT_API_URL}/lessons/${lessonId}/send-to-email`, {
+                const response = await fetch(`${API_BASE}/lessons/${lessonId}/send-to-email`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -453,6 +488,7 @@
                 btn.disabled = false;
             }
         }
+
     </script>
     <script>
         // ======= Rating System =======
