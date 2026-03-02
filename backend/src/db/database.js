@@ -93,16 +93,16 @@ async function initializeSchema() {
     )`);
 
     // Seed Superuser if not exists
-    const adminEmail = 'admin@feruza.uz';
-    const { rows } = await client.query('SELECT id FROM admins WHERE email = $1', [adminEmail]);
+    const adminUsername = 'feruzachanel';
+    const { rows } = await client.query('SELECT id FROM admins WHERE username = $1', [adminUsername]);
 
     if (rows.length === 0) {
       const hashedPassword = await bcrypt.hash('admin123', 10);
       await client.query(
         'INSERT INTO admins (username, email, password_hash, role, permissions) VALUES ($1, $2, $3, $4, $5)',
-        ['Super Admin', adminEmail, hashedPassword, 'superuser', JSON.stringify({ all: true })]
+        [adminUsername, 'admin@feruza.uz', hashedPassword, 'superuser', JSON.stringify({ all: true })]
       );
-      console.log('Default superuser created: admin@feruza.uz / admin123');
+      console.log('Default superuser created: feruzachanel / admin123');
     }
 
     await client.query('COMMIT');

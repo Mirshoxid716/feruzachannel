@@ -6,20 +6,20 @@ const { generateAdminToken, verifyAdminToken, requireSuperuser } = require('../m
 
 // ======= Admin Login =======
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Email va parolni kiriting' });
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Username va parolni kiriting' });
     }
 
     try {
-        const { rows } = await db.query('SELECT * FROM admins WHERE email = $1', [email]);
+        const { rows } = await db.query('SELECT * FROM admins WHERE username = $1', [username]);
         const admin = rows[0];
 
-        if (!admin) return res.status(401).json({ error: 'Email yoki parol noto\'g\'ri' });
+        if (!admin) return res.status(401).json({ error: 'Username yoki parol noto\'g\'ri' });
 
         const isMatch = await bcrypt.compare(password, admin.password_hash);
-        if (!isMatch) return res.status(401).json({ error: 'Email yoki parol noto\'g\'ri' });
+        if (!isMatch) return res.status(401).json({ error: 'Username yoki parol noto\'g\'ri' });
 
         const token = generateAdminToken(admin);
 

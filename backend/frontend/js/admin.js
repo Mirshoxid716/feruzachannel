@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('admin-login-btn');
     if (loginBtn) loginBtn.addEventListener('click', attemptAdminLogin);
 
-    const emailInput = document.getElementById('admin-email-input');
+    const usernameInput = document.getElementById('admin-username-input');
     const passInput = document.getElementById('admin-password-input');
-    if (emailInput) emailInput.addEventListener('keypress', e => { if (e.key === 'Enter') passInput.focus(); });
+    if (usernameInput) usernameInput.addEventListener('keypress', e => { if (e.key === 'Enter') passInput.focus(); });
     if (passInput) passInput.addEventListener('keypress', e => { if (e.key === 'Enter') attemptAdminLogin(); });
 
     // Profile form
@@ -36,12 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // AUTH
 // ======================================
 async function attemptAdminLogin() {
-    const email = document.getElementById('admin-email-input').value;
+    const username = document.getElementById('admin-username-input').value;
     const password = document.getElementById('admin-password-input').value;
     const error = document.getElementById('login-error');
 
-    if (!email || !password) {
-        error.innerText = 'Email va parolni kiriting!';
+    if (!username || !password) {
+        error.innerText = 'Username va parolni kiriting!';
         return;
     }
 
@@ -51,7 +51,7 @@ async function attemptAdminLogin() {
         const res = await fetch(`${ADMIN_AUTH_API}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ username, password })
         });
         const data = await res.json();
 
