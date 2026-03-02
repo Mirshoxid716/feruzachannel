@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
+const bcrypt = require('bcryptjs');
 dotenv.config();
 
 const pool = new Pool({
@@ -91,8 +92,21 @@ async function initializeSchema() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
 
+    // Seed Superuser if not exists
+    const adminEmail = 'admin@feruza.uz';
+    const { rows } = await client.query('SELECT id FROM admins WHERE email = $1', [adminEmail]);
+
+    if (rows.length === 0) {
+      const hashedPassword = await bcrypt.hash('admin123', 10);
+      await client.query(
+        'INSERT INTO admins (username, email, password_hash, role, permissions) VALUES ($1, $2, $3, $4, $5)',
+        ['Super Admin', adminEmail, hashedPassword, 'superuser', JSON.stringify({ all: true })]
+      );
+      console.log('Default superuser created: admin@feruza.uz / admin123');
+    }
+
     await client.query('COMMIT');
-    console.log('Database schema initialized successfully.');
+    console.log('Database schema initialized and seeded successfully.');
   } catch (err) {
     await client.query('ROLLBACK');
     console.error('Error initializing schema:', err);
