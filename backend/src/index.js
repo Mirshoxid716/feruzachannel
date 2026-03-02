@@ -62,6 +62,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// HTML Routes
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/admin.html'));
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/lessons', require('./routes/lessons'));
