@@ -1,0 +1,15 @@
+<svg width="400" height="220" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="220" fill="#F8F9FD"/>
+    <circle cx="200" cy="110" r="80" fill="url(#grad1)" opacity="0.1"/>
+    <path d="M160 80H240V140H160V80Z" stroke="#5B58F1" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M170 95H230" stroke="#5B58F1" stroke-width="2"/>
+    <path d="M170 110H230" stroke="#5B58F1" stroke-width="2"/>
+    <path d="M170 125H200" stroke="#5B58F1" stroke-width="2"/>
+    <text x="50%" y="170" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="800" font-size="24" fill="#5B58F1">JLPT N2</text>
+    <defs>
+        <radialGradient id="grad1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(200 110) rotate(90) scale(80)">
+            <stop stop-color="#5B58F1"/>
+            <stop offset="1" stop-color="#5B58F1" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+</svg>

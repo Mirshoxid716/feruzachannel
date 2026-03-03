@@ -67,24 +67,24 @@ app.use((req, res, next) => {
 });
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '../../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // HTML Routes
 app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/admin.html'));
+    res.sendFile(path.join(__dirname, '../frontend/admin.html'));
 });
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/login.html'));
+    res.sendFile(path.join(__dirname, '../frontend/login.html'));
 });
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/register.html'));
+    res.sendFile(path.join(__dirname, '../frontend/register.html'));
 });
 app.get('/courses', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/courses.html'));
+    res.sendFile(path.join(__dirname, '../frontend/courses.html'));
 });
 app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/contact.html'));
+    res.sendFile(path.join(__dirname, '../frontend/contact.html'));
 });
 
 // Routes
