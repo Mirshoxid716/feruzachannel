@@ -2,6 +2,8 @@ const API_URL = window.APP_CONFIG.API_URL;
 
 // Load lessons on index or courses page
 document.addEventListener('DOMContentLoaded', () => {
+    initI18n(); // Initialize translations
+
     const lessonsList = document.getElementById('lessons-list');
     if (lessonsList) {
         loadLessons();
@@ -185,5 +187,90 @@ async function handleMaterialRequest(e, lessonId) {
     } catch (error) {
         status.innerText = 'Serverga bog\'lanishda xatolik.';
         status.style.color = 'red';
+    }
+}
+
+// i18n Logic
+function initI18n() {
+    const savedLang = localStorage.getItem('app_lang') || 'uz';
+    setLanguage(savedLang);
+
+    // Initial render of language selector state
+    updateLangSelectorUI(savedLang);
+
+    // Header updates for login/cabinet buttons
+    updateAuthButtons(savedLang);
+}
+
+function setLanguage(lang) {
+    if (!window.i18n || !window.i18n[lang]) return;
+
+    localStorage.setItem('app_lang', lang);
+    const trans = window.i18n[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (trans[key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = trans[key];
+            } else {
+                el.innerHTML = trans[key];
+            }
+        }
+    });
+
+    // Update page title if needed (e.g. for static pages)
+    updateLangSelectorUI(lang);
+}
+
+function updateLangSelectorUI(lang) {
+    const langBtn = document.getElementById('current-lang');
+    if (langBtn) {
+        langBtn.innerText = lang.toUpperCase();
+    }
+
+    document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.lang === lang);
+    });
+}
+
+function toggleLangDropdown() {
+    const dropdown = document.getElementById('lang-dropdown');
+    if (dropdown) {
+        dropdown.classList.toggle('active');
+    }
+}
+
+// Close dropdown when clicking outside
+window.addEventListener('click', (e) => {
+    if (!e.target.closest('.lang-selector')) {
+        const dropdown = document.getElementById('lang-dropdown');
+        if (dropdown) dropdown.classList.remove('active');
+    }
+});
+
+function changeLanguage(lang) {
+    setLanguage(lang);
+    toggleLangDropdown();
+
+    // Re-render lessons if on lessons page
+    if (allLessons.length > 0) {
+        renderLessons(allLessons);
+    }
+
+    // Update login context
+    updateAuthButtons(lang);
+}
+
+function updateAuthButtons(lang) {
+    const authBtn = document.getElementById('auth-nav-btn');
+    if (authBtn) {
+        if (typeof getAuthToken === 'function' && getAuthToken()) {
+            authBtn.innerText = window.i18n[lang].nav_cabinet;
+            authBtn.href = "profile.html";
+        } else {
+            authBtn.innerText = window.i18n[lang].nav_register;
+            authBtn.href = "register.html";
+        }
     }
 }
