@@ -1,3 +1,4 @@
+console.log('--- SERVER STARTING vFINAL ---');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
