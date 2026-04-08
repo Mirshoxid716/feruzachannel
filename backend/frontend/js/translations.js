@@ -37,7 +37,12 @@ const translations = {
         lesson_materials: "Materiallar",
         lesson_watch: "Videoni ko'rish",
         lesson_request_materials: "Materiallarni olish uchun emailingizni kiriting",
-        lesson_request_btn: "Yozib olish"
+        lesson_request_btn: "Yozib olish",
+        profile_menu_info: "Profil",
+        profile_welcome: "Xush kelibsiz!",
+        profile_summary_subtitle: "Bu sizning shaxsiy kabinetingiz. Endi istalgan darsni ko'rib, uning PDF materialini o'z emailingizga bitta tugma orqali bepul yuborishingiz mumkin.",
+        profile_stat_courses: "Kurslar soni",
+        profile_stat_completed: "Tugatilgan darslar"
     },
     ja: {
         nav_home: "ホーム",
@@ -77,7 +82,12 @@ const translations = {
         lesson_materials: "教材",
         lesson_watch: "動画を見る",
         lesson_request_materials: "教材を受け取るにはメールアドレスを入力してください",
-        lesson_request_btn: "リクエストする"
+        lesson_request_btn: "リクエストする",
+        profile_menu_info: "プロフィール",
+        profile_welcome: "ようこそ！",
+        profile_summary_subtitle: "これはあなたのマイページです。ここから好きなレッスンを視聴したり、ワンクリックでPDF教材をメールに送信したりできます。",
+        profile_stat_courses: "コース数",
+        profile_stat_completed: "完了したレッスン"
     }
 };
 

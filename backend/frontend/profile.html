@@ -8,263 +8,372 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --profile-primary: #6366f1;
-            --profile-accent: #f59e0b;
-            --profile-bg: #f8fafc;
-            --card-glass: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(255, 255, 255, 0.4);
-            --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-            --radius-premium: 24px;
+            --ziyo-blue: #5B8CD9;
+            --ziyo-dark-blue: #4A77BE;
+            --ziyo-bg: #F5F7FA;
+            --ziyo-card-header: #82A9E5;
+            --ziyo-text: #444;
+            --ziyo-border: #E1E8F0;
         }
 
         body {
-            background:
-                radial-gradient(1000px 600px at 10% 10%, rgba(177, 125, 0, 0.08), transparent 60%),
-                radial-gradient(1000px 600px at 90% 90%, rgba(99, 102, 241, 0.08), transparent 60%),
-                var(--profile-bg);
-            min-height: 100vh;
+            background-color: var(--ziyo-bg);
             font-family: 'Outfit', sans-serif;
-            color: #1e293b;
-            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            color: var(--ziyo-text);
         }
 
-        /* Minimalist Header */
-        .header-minimal {
-            padding: 1.5rem 0;
-            background: transparent;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-minimal {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #0f172a;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-minimal span {
-            color: var(--primary);
-        }
-
-        .nav-minimal {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-minimal a {
-            text-decoration: none;
-            color: #475569;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .nav-minimal a:hover {
-            color: var(--primary);
-        }
-
-        /* Profile Layout */
-        .profile-wrapper {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .premium-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-premium);
-            box-shadow: var(--shadow-premium);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-inner {
-            padding: 3.5rem;
-        }
-
-        /* User Identity Section */
-        .user-identity {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .user-avatar-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .avatar-minimal {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        /* ZiyoNET Style Header */
+        .ziyo-header {
+            background-color: var(--ziyo-blue);
             color: white;
-            border-radius: 20px;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ziyo-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+        }
+
+        .ziyo-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ziyo-logo i {
+            font-size: 2rem;
+        }
+
+        .ziyo-logo span {
+            font-weight: 400;
+            font-size: 1.4rem;
+        }
+
+        .ziyo-search-bar {
+            background: white;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            padding: 5px 5px 5px 20px;
+            width: 400px;
+            margin: 0 20px;
+        }
+
+        .ziyo-search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            padding: 8px 0;
+        }
+
+        .ziyo-search-bar button {
+            background-color: #F68D6A;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ziyo-header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ziyo-header-right select {
+            background: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .ziyo-icon-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
-            font-weight: 800;
-            box-shadow: 0 10px 20px rgba(177, 125, 0, 0.2);
-        }
-
-        .user-info h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-            color: #0f172a;
-        }
-
-        .user-info p {
-            font-size: 0.95rem;
-            color: #64748b;
-            font-weight: 500;
-        }
-
-        /* Actions */
-        .logout-btn-minimal {
-            padding: 0.75rem 1.5rem;
-            background: rgba(239, 68, 68, 0.08);
-            color: #ef4444;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-block;
+            transition: 0.2s;
         }
 
-        .logout-btn-minimal:hover {
-            background: #ef4444;
-            color: white;
-            transform: translateY(-2px);
+        .ziyo-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
-        /* Welcome Section */
-        .welcome-content {
-            margin-bottom: 3rem;
-        }
-
-        .welcome-content h2 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: #0f172a;
-        }
-
-        .welcome-content p {
-            line-height: 1.6;
-            color: #475569;
-            font-size: 1rem;
-            max-width: 600px;
-        }
-
-        /* Stats Grid - Minimal */
-        .stats-minimal {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-item {
-            text-align: left;
-        }
-
-        .stat-btn {
+        .ziyo-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: var(--ziyo-blue);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 1.25rem 2rem;
-            background: var(--primary);
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .ziyo-menu-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Breadcrumbs */
+        .ziyo-breadcrumbs {
+            max-width: 1280px;
+            margin: 20px auto;
+            padding-left: 20px;
+            font-size: 0.9rem;
+            color: var(--ziyo-blue);
+        }
+
+        .ziyo-breadcrumbs a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout */
+        .ziyo-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            max-width: 1280px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        /* Sidebar */
+        .ziyo-sidebar {
+            background-color: var(--ziyo-blue);
+            border-radius: 20px;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .ziyo-sidebar-header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+        }
+
+        .ziyo-sidebar-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            color: var(--ziyo-blue);
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .ziyo-sidebar-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            word-break: break-all;
+        }
+
+        .ziyo-sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ziyo-sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ziyo-sidebar-menu li a:hover,
+        .ziyo-sidebar-menu li a.active {
+            background-color: white;
+            color: var(--ziyo-blue);
+        }
+
+        .ziyo-sidebar-menu li a i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .ziyo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .ziyo-section-title {
+            background-color: var(--ziyo-blue);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: -15px;
+            z-index: 1;
+        }
+
+        .ziyo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--ziyo-border);
+            overflow: hidden;
+        }
+
+        .ziyo-card-header {
+            padding: 15px 25px;
+            background-color: #F9FAFB;
+            border-bottom: 1px solid var(--ziyo-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ziyo-blue);
+            font-weight: 600;
+        }
+
+        .ziyo-card-body {
+            padding: 30px 25px;
+        }
+
+        .ziyo-alert-error {
+            background-color: #FF5A5A;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .ziyo-alert-error strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
+        .ziyo-btn-action {
+            background-color: #00A3A3;
             color: white;
             border: none;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 1rem;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            float: right;
+            transition: 0.2s;
+        }
+
+        .ziyo-btn-action:hover {
+            background-color: #008E8E;
+            transform: translateY(-1px);
+        }
+
+        /* Logout button */
+        .ziyo-logout-wrapper {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ziyo-logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 30px;
+            color: #FFB3B3;
             text-decoration: none;
-            box-shadow: 0 15px 30px rgba(177, 125, 0, 0.2);
+            font-weight: 600;
+            width: 100%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .stat-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(177, 125, 0, 0.3);
-            filter: brightness(1.1);
+        .ziyo-logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #FFDADA;
         }
 
-        .stat-btn i {
-            font-size: 1.25rem;
+        /* Stats grid from existing design but adapted */
+        .stats-ziyo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
 
-        /* Language Switcher Styling */
-        .lang-float {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-        }
-
-        /* Footer */
-        .footer-minimal {
+        .stat-ziyo-item {
             text-align: center;
-            padding: 3rem 0;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            font-weight: 500;
+            padding: 20px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
         }
 
-        @media (max-width: 640px) {
-            .card-inner {
-                padding: 2rem;
-            }
+        .stat-ziyo-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--ziyo-blue);
+            margin-bottom: 5px;
+        }
 
-            .user-identity {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
-            }
+        .stat-ziyo-label {
+            color: #64748B;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
 
-            .nav-minimal {
+        @media (max-width: 900px) {
+            .ziyo-layout {
+                grid-template-columns: 1fr;
+            }
+            .ziyo-search-bar {
                 display: none;
             }
         }
@@ -272,72 +381,146 @@
 </head>
 
 <body>
-    <header class="header-minimal">
-        <div class="header-container">
-            <a href="index.html" class="logo-minimal">Feruza <span>Channel</span></a>
-            <nav class="nav-minimal">
-                <a href="index.html" data-i18n="nav_home">Bosh sahifa</a>
-                <a href="courses.html" data-i18n="nav_courses">Darslar</a>
-            </nav>
-            <div class="lang-selector">
-                <button class="lang-btn" onclick="toggleLangDropdown()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                        <path
-                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                        </path>
-                    </svg>
-                    <span id="current-lang">UZ</span>
+    <!-- ZiyoNET Style Header -->
+    <header class="ziyo-header">
+        <div class="container">
+            <a href="index.html" class="ziyo-logo">
+                <i class="fas fa-book-open"></i>
+                Feruza <span>Channel</span>
+            </a>
+
+            <div class="ziyo-search-bar">
+                <input type="text" placeholder="Qidiruv..." data-i18n="hero_search_placeholder">
+                <button>
+                    <i class="fas fa-search"></i>
+                    <span data-i18n="hero_search_btn">Qidiruv</span>
                 </button>
-                <div class="lang-dropdown" id="lang-dropdown">
-                    <div class="lang-option" data-lang="uz" onclick="changeLanguage('uz')">O'zbekcha (UZ)</div>
-                    <div class="lang-option" data-lang="ja" onclick="changeLanguage('ja')">日本語 (JA)</div>
+            </div>
+
+            <div class="ziyo-header-right">
+                <div class="lang-selector">
+                    <button class="ziyo-icon-btn" onclick="toggleLangDropdown()">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="uz" onclick="changeLanguage('uz')">O'zbekcha (UZ)</div>
+                        <div class="lang-option" data-lang="ja" onclick="changeLanguage('ja')">日本語 (JA)</div>
+                    </div>
+                </div>
+
+                <div class="ziyo-icon-btn">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="ziyo-icon-btn">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="ziyo-user-avatar" id="header-avatar">U</div>
+                <div class="ziyo-menu-btn">
+                    <i class="fas fa-bars"></i>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="profile-wrapper">
-        <div class="premium-card">
-            <div class="card-inner">
-                <div class="user-identity">
-                    <div class="user-avatar-wrapper">
-                        <div class="avatar-minimal" id="user-avatar">U</div>
-                        <div class="user-info">
-                            <h1 id="user-name">Yuklanmoqda...</h1>
-                            <p id="user-email">email@example.com</p>
+    <!-- Breadcrumbs -->
+    <div class="ziyo-breadcrumbs">
+        <a href="index.html" data-i18n="nav_home">Asosiy</a> &gt; <span data-i18n="profile_title">Profilni sozlash</span>
+    </div>
+
+    <!-- Layout -->
+    <div class="ziyo-layout">
+        <!-- Sidebar -->
+        <aside class="ziyo-sidebar">
+            <div class="ziyo-sidebar-header">
+                <div class="ziyo-sidebar-avatar" id="user-avatar">U</div>
+                <h3 class="ziyo-sidebar-name" id="user-name">Yuklanmoqda...</h3>
+            </div>
+            <ul class="ziyo-sidebar-menu">
+                <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span data-i18n="profile_menu_info">Profil</span></a></li>
+                <li><a href="courses.html"><i class="fas fa-users"></i> <span data-i18n="profile_menu_courses">Darslar</span></a></li>
+                <li><a href="#"><i class="fas fa-layer-group"></i> <span data-i18n="nav_courses">Resurslar</span></a></li>
+                <li><a href="#"><i class="fas fa-images"></i> <span>Media-fayllar</span></a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> <span>Reyting</span></a></li>
+            </ul>
+            <div class="ziyo-logout-wrapper">
+                <button onclick="handleLogout()" class="ziyo-logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span data-i18n="logout_btn">Tizimdan chiqish</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="ziyo-content">
+            <div class="ziyo-section-title">
+                <i class="fas fa-user-circle"></i>
+                <span data-i18n="profile_menu_info">Profil</span>
+            </div>
+
+            <!-- Photos Card -->
+            <div class="ziyo-card">
+                <div class="ziyo-card-header">
+                    <i class="fas fa-image"></i>
+                    <span>Fotosuratlar</span>
+                </div>
+                <div class="ziyo-card-body">
+                    <div class="ziyo-alert-error">
+                        <strong>Ошибка</strong>
+                        Your email address is not verified.
+                    </div>
+                    <button class="ziyo-btn-action">
+                        <i class="fas fa-plus"></i>
+                        <span>Fayllarni qo'shish</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Welcome/Stats Card -->
+            <div class="ziyo-card">
+                <div class="ziyo-card-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span data-i18n="profile_welcome">Xush kelibsiz!</span>
+                </div>
+                <div class="ziyo-card-body">
+                    <p data-i18n="profile_summary_subtitle" style="margin-bottom: 30px;">Bu sizning shaxsiy kabinetingiz. Endi istalgan darsni ko'rib, uning PDF materialini o'z emailingizga bitta tugma orqali bepul yuborishingiz mumkin.</p>
+                    
+                    <div class="stats-ziyo-grid">
+                        <div class="stat-ziyo-item">
+                            <div class="stat-ziyo-value" id="courses-count">0</div>
+                            <div class="stat-ziyo-label" data-i18n="profile_stat_courses">Kurslar soni</div>
+                        </div>
+                        <div class="stat-ziyo-item">
+                            <div class="stat-ziyo-value" id="completed-count">0</div>
+                            <div class="stat-ziyo-label" data-i18n="profile_stat_completed">Tugatilgan darslar</div>
                         </div>
                     </div>
-                    <button onclick="handleLogout()" class="logout-btn-minimal" data-i18n="logout">Tizimdan
-                        chiqish</button>
                 </div>
+            </div>
 
-                <div class="welcome-content">
-                    <h2 data-i18n="profile_welcome">Xush kelibsiz!</h2>
-                    <p data-i18n="profile_summary_subtitle">Bu sizning shaxsiy kabinetingiz. Endi istalgan darsni
-                        ko'rib, uning PDF materialini o'z emailingizga bitta tugma orqali bepul yuborishingiz mumkin.
-                    </p>
+            <!-- Education Mockup Card -->
+            <div class="ziyo-card">
+                <div class="ziyo-card-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Ta'lim</span>
                 </div>
-
-                <div class="stats-minimal">
-                    <a href="courses.html" class="stat-btn">
-                        <span data-i18n="profile_menu_courses">Darslarni ko'rish</span>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </a>
+                <div class="ziyo-card-body">
+                    <div class="ziyo-alert-error">
+                        <strong>Ошибка</strong>
+                        Your email address is not verified.
+                    </div>
+                    <button class="ziyo-btn-action">
+                        <i class="fas fa-plus"></i>
+                        <span>Qo'shish</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="footer-minimal">
-        <div class="container">
-            <p>&copy; 2026 Feruza Channel.</p>
+    <!-- Footer same as previous but minimalist -->
+    <footer class="footer-minimal" style="background: white; border-top: 1px solid var(--ziyo-border); padding: 40px 0;">
+        <div class="container" style="text-align: center;">
+            <p style="color: #64748B;">&copy; 2026 Feruza Channel. Barcha huquqlar himoyalangan.</p>
         </div>
     </footer>
 
@@ -352,9 +535,10 @@
                 window.location.href = 'login.html';
                 return;
             }
-            document.getElementById('user-name').textContent = user.name || 'Foydalanuvchi';
-            document.getElementById('user-email').textContent = user.email || '';
-            document.getElementById('user-avatar').textContent = (user.name || 'U').charAt(0).toUpperCase();
+            const name = user.name || 'Foydalanuvchi';
+            document.getElementById('user-name').textContent = name;
+            document.getElementById('user-avatar').textContent = name.charAt(0).toUpperCase();
+            document.getElementById('header-avatar').textContent = name.charAt(0).toUpperCase();
         });
 
         function handleLogout() {
