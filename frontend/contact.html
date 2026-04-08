@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bog'lanish - Feruza Channel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="contact-page">
+    <header class="main-header">
+        <nav class="container">
+            <div class="logo">Feruza <span class="accent">Channel</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav_home">Bosh sahifa</a></li>
+                <li><a href="courses.html" data-i18n="nav_courses">Kurslar</a></li>
+                <li><a href="contact.html" class="active" data-i18n="nav_contact">Aloqa</a></li>
+            </ul>
+            <div style="display: flex; align-items: center;">
+                <div class="lang-selector">
+                    <button class="lang-btn" onclick="toggleLangDropdown()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                        <span id="current-lang">UZ</span>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="uz" onclick="changeLanguage('uz')">O'zbekcha (UZ)</div>
+                        <div class="lang-option" data-lang="ja" onclick="changeLanguage('ja')">日本語 (JA)</div>
+                        <div class="lang-option" data-lang="en" onclick="changeLanguage('en')">English (EN)</div>
+                        <div class="lang-option" data-lang="ru" onclick="changeLanguage('ru')">Русский (RU)</div>
+                    </div>
+                </div>
+                <a href="register.html" id="auth-nav-btn" class="btn btn-nav" data-i18n="nav_register">Ro'yxatdan
+                    o'tish</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="contact-hero">
+            <h1 class="contact-title" data-i18n="contact_title">Contact us!</h1>
+            <div class="title-underline"></div>
+        </section>
+
+        <section class="contact-main-grid">
+            <!-- Left Side: Info & Map -->
+            <div class="contact-info-side">
+                <div class="info-item">
+                    <img src="assets/location-pin.svg" alt="" class="info-icon">
+                    <p data-i18n="contact_address">Toshkent shahar, Chilonzor tumani, 12-mavze</p>
+                </div>
+                <div class="info-item">
+                    <img src="assets/email-envelope.svg" alt="" class="info-icon">
+                    <p>info@feruzachannel.uz</p>
+                </div>
+                <div class="info-item">
+                    <img src="assets/telegram-blue.svg" alt="" class="info-icon">
+                    <p>@feruza_channel_official</p>
+                </div>
+
+                <div class="map-illustration">
+                    <!-- Placeholder for the map illustration from reference -->
+                    <div class="map-placeholder">
+                        <img src="assets/map-illustration.svg" alt="Map" class="map-svg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Form -->
+            <div class="contact-form-side">
+                <form id="contact-form" class="styled-form-v2">
+                    <div class="form-group">
+                        <input type="text" id="name" required placeholder="NAME" data-i18n="contact_name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required placeholder="EMAIL" data-i18n="email">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="5" required placeholder="MESSAGE"
+                            data-i18n="contact_message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit-v2" data-i18n="contact_send">SUBMIT</button>
+                    <div id="contact-status" class="status-msg"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-v2">
+        <div class="container footer-grid-v2">
+            <div class="footer-brand">
+                <div class="footer-shield">
+                    <span class="shield-text">R</span>
+                </div>
+                <p class="copyright-v2">@ 2026 Feruza Channel. <span data-i18n="footer_rights">Barcha huquqlar
+                        himoyalangan.</span></p>
+            </div>
+
+            <div class="footer-column">
+                <h3 data-i18n="footer_about_title">About us</h3>
+                <ul>
+                    <li data-i18n="footer_company">Company</li>
+                    <li data-i18n="footer_what_we_do">What we do</li>
+                    <li data-i18n="footer_help">Help center</li>
+                    <li data-i18n="footer_contact">Contact</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer_about_title">About us</h3>
+                <ul>
+                    <li data-i18n="footer_company">Company</li>
+                    <li data-i18n="footer_what_we_do">What we do</li>
+                    <li data-i18n="footer_help">Help center</li>
+                    <li data-i18n="footer_contact">Contact</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer_about_title">About us</h3>
+                <ul>
+                    <li data-i18n="footer_company">Company</li>
+                    <li data-i18n="footer_what_we_do">What we do</li>
+                    <li data-i18n="footer_help">Help center</li>
+                    <li data-i18n="footer_contact">Contact</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer_about_title">About us</h3>
+                <ul>
+                    <li data-i18n="footer_company">Company</li>
+                    <li data-i18n="footer_what_we_do">What we do</li>
+                    <li data-i18n="footer_help">Help center</li>
+                    <li data-i18n="footer_contact">Contact</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

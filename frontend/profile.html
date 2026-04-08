@@ -1,316 +1,554 @@
-<style>
-    :root {
-        --sidebar-width: 300px;
+<!DOCTYPE html>
+<html lang="uz">
 
-        /* Premium palette (primary/accent sizning style.css dan keladi) */
-        --card-bg: rgba(255, 255, 255, .82);
-        --card-solid: #ffffff;
-        --stroke: rgba(255, 255, 255, .55);
-        --stroke-soft: rgba(0, 0, 0, .06);
-
-        --shadow-1: 0 10px 30px rgba(17, 24, 39, .10);
-        --shadow-2: 0 20px 60px rgba(17, 24, 39, .14);
-
-        --radius-xl: 26px;
-        --radius-lg: 20px;
-
-        --blur: 14px;
-    }
-
-    body {
-        background:
-            radial-gradient(900px 500px at 15% 10%, rgba(255, 205, 72, .22), transparent 60%),
-            radial-gradient(900px 500px at 85% 20%, rgba(177, 125, 0, .18), transparent 60%),
-            radial-gradient(900px 600px at 50% 90%, rgba(0, 0, 0, .06), transparent 60%),
-            var(--bg-light);
-        min-height: 100vh;
-    }
-
-    /* Header polish */
-    .main-header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background: rgba(255, 255, 255, .75);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(0, 0, 0, .06);
-    }
-
-    .main-header .logo {
-        font-weight: 800;
-        letter-spacing: .2px;
-    }
-
-    .nav-links a {
-        position: relative;
-    }
-
-    .nav-links a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -10px;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent), var(--primary));
-        transition: width .25s ease;
-        border-radius: 10px;
-    }
-
-    .nav-links a:hover::after {
-        width: 100%;
-    }
-
-    /* Hero */
-    .profile-hero {
-        padding: 120px 0 90px;
-        position: relative;
-        overflow: hidden;
-        color: #111827;
-        background:
-            radial-gradient(900px 500px at 20% 30%, rgba(255, 205, 72, .55), transparent 60%),
-            radial-gradient(1000px 650px at 80% 25%, rgba(177, 125, 0, .35), transparent 60%),
-            linear-gradient(135deg, rgba(255, 255, 255, .75), rgba(255, 255, 255, .35));
-        border-bottom: 1px solid rgba(255, 255, 255, .55);
-    }
-
-    .profile-hero::before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        background: url('assets/wavy.svg') repeat-x;
-        background-position: bottom;
-        opacity: .12;
-        pointer-events: none;
-    }
-
-    .profile-hero::after {
-        content: "";
-        position: absolute;
-        width: 520px;
-        height: 520px;
-        right: -180px;
-        top: -220px;
-        background: radial-gradient(circle, rgba(255, 205, 72, .55), transparent 60%);
-        filter: blur(10px);
-        opacity: .9;
-        pointer-events: none;
-    }
-
-    .hero-title {
-        font-size: clamp(2.1rem, 3.4vw, 3.2rem);
-        line-height: 1.05;
-        letter-spacing: -0.8px;
-        margin-bottom: 14px;
-        font-weight: 900;
-    }
-
-    /* Layout grid */
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: var(--sidebar-width) 1fr;
-        gap: 2rem;
-        margin-top: -54px;
-        position: relative;
-        z-index: 10;
-        padding-bottom: 30px;
-    }
-
-    /* Premium glass card base */
-    .glass-card {
-        background: var(--card-bg);
-        border: 1px solid var(--stroke);
-        box-shadow: var(--shadow-1);
-        backdrop-filter: blur(var(--blur));
-        -webkit-backdrop-filter: blur(var(--blur));
-        border-radius: var(--radius-xl);
-    }
-
-    /* Sidebar */
-    .profile-sidebar {
-        padding: 2.2rem;
-        height: fit-content;
-        text-align: center;
-        position: sticky;
-        top: 92px;
-    }
-
-    .profile-sidebar.glass-card {
-        box-shadow: var(--shadow-2);
-    }
-
-    .avatar-circle {
-        width: 92px;
-        height: 92px;
-        border-radius: 26px;
-        margin: 0 auto 1.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        font-weight: 900;
-        color: #111827;
-        background:
-            linear-gradient(135deg, rgba(255, 205, 72, .85), rgba(177, 125, 0, .35));
-        border: 1px solid rgba(255, 255, 255, .75);
-        box-shadow: 0 14px 30px rgba(177, 125, 0, .18);
-    }
-
-    .user-name {
-        font-size: 1.25rem;
-        font-weight: 900;
-        margin-bottom: 0.25rem;
-        color: #0f172a;
-    }
-
-    .user-email {
-        color: rgba(15, 23, 42, .62);
-        font-size: 0.92rem;
-        margin-bottom: 1.4rem;
-    }
-
-    .sidebar-menu {
-        list-style: none;
-        text-align: left;
-        margin-top: 1.1rem;
-        padding: 0;
-    }
-
-    .sidebar-menu a {
-        display: flex;
-        align-items: center;
-        gap: .9rem;
-        padding: .9rem 1rem;
-        text-decoration: none;
-        color: #0f172a;
-        font-weight: 700;
-        border-radius: 16px;
-        transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
-        background: rgba(255, 255, 255, .55);
-        border: 1px solid rgba(0, 0, 0, .04);
-    }
-
-    .sidebar-menu a:hover {
-        transform: translateY(-1px);
-        background: rgba(255, 255, 255, .85);
-        box-shadow: 0 10px 20px rgba(17, 24, 39, .08);
-    }
-
-    .sidebar-menu a.active {
-        background: linear-gradient(135deg, rgba(255, 205, 72, .35), rgba(177, 125, 0, .10));
-        border: 1px solid rgba(177, 125, 0, .18);
-        color: #0f172a;
-    }
-
-    /* Main */
-    .profile-main {
-        display: flex;
-        flex-direction: column;
-        gap: 1.6rem;
-        min-width: 0;
-    }
-
-    .content-card {
-        padding: 2.2rem;
-        border-radius: var(--radius-xl);
-        background: var(--card-solid);
-        border: 1px solid var(--stroke-soft);
-        box-shadow: var(--shadow-1);
-    }
-
-    .welcome-card {
-        position: relative;
-        overflow: hidden;
-        border: 1px solid rgba(177, 125, 0, .12);
-        background:
-            radial-gradient(700px 300px at 15% 20%, rgba(255, 205, 72, .28), transparent 60%),
-            radial-gradient(700px 350px at 80% 10%, rgba(177, 125, 0, .16), transparent 60%),
-            #fff;
-    }
-
-    .welcome-card::after {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        background: linear-gradient(90deg, rgba(255, 205, 72, .28), transparent, rgba(177, 125, 0, .12));
-        opacity: .35;
-        pointer-events: none;
-        transform: translateX(-30%);
-    }
-
-    /* Stats */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 1.1rem;
-    }
-
-    .stat-card {
-        padding: 1.3rem 1.35rem;
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(0, 0, 0, .06);
-        background:
-            linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .75));
-        box-shadow: 0 10px 22px rgba(17, 24, 39, .08);
-        transition: transform .18s ease, box-shadow .18s ease;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 40px rgba(17, 24, 39, .12);
-    }
-
-    .stat-value {
-        font-size: 1.65rem;
-        font-weight: 900;
-        letter-spacing: -0.4px;
-        color: var(--primary);
-    }
-
-    .stat-label {
-        font-weight: 700;
-        color: rgba(15, 23, 42, .62);
-        font-size: .92rem;
-    }
-
-    /* CTA button polish */
-    .btn.btn-primary {
-        border-radius: 999px;
-        padding: 0.95rem 1.35rem;
-        box-shadow: 0 16px 34px rgba(177, 125, 0, .18);
-        transform: translateZ(0);
-    }
-
-    .btn.btn-primary:hover {
-        transform: translateY(-2px);
-    }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-        .dashboard-grid {
-            grid-template-columns: 1fr;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="profile_title">Mening Profilim - Feruza Channel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --ziyo-blue: #5B8CD9;
+            --ziyo-dark-blue: #4A77BE;
+            --ziyo-bg: #F5F7FA;
+            --ziyo-card-header: #82A9E5;
+            --ziyo-text: #444;
+            --ziyo-border: #E1E8F0;
         }
 
-        .profile-sidebar {
-            position: relative;
-            top: 0;
+        body {
+            background-color: var(--ziyo-bg);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--ziyo-text);
+        }
+
+        /* ZiyoNET Style Header */
+        .ziyo-header {
+            background-color: var(--ziyo-blue);
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ziyo-header .container {
             display: flex;
             align-items: center;
-            gap: 1.2rem;
-            text-align: left;
-            padding: 1.4rem;
+            justify-content: space-between;
+            max-width: 1280px;
         }
 
-        .avatar-circle {
-            margin: 0;
-            width: 76px;
-            height: 76px;
+        .ziyo-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ziyo-logo i {
+            font-size: 2rem;
+        }
+
+        .ziyo-logo span {
+            font-weight: 400;
+            font-size: 1.4rem;
+        }
+
+        .ziyo-search-bar {
+            background: white;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            padding: 5px 5px 5px 20px;
+            width: 400px;
+            margin: 0 20px;
+        }
+
+        .ziyo-search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            padding: 8px 0;
+        }
+
+        .ziyo-search-bar button {
+            background-color: #F68D6A;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ziyo-header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ziyo-header-right select {
+            background: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .ziyo-icon-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .ziyo-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .ziyo-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: var(--ziyo-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .ziyo-menu-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Breadcrumbs */
+        .ziyo-breadcrumbs {
+            max-width: 1280px;
+            margin: 20px auto;
+            padding-left: 20px;
+            font-size: 0.9rem;
+            color: var(--ziyo-blue);
+        }
+
+        .ziyo-breadcrumbs a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout */
+        .ziyo-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            max-width: 1280px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        /* Sidebar */
+        .ziyo-sidebar {
+            background-color: var(--ziyo-blue);
             border-radius: 20px;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
         }
 
-        .sidebar-menu {
-            display: none;
+        .ziyo-sidebar-header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
         }
-    }
-</style>
+
+        .ziyo-sidebar-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            color: var(--ziyo-blue);
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .ziyo-sidebar-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            word-break: break-all;
+        }
+
+        .ziyo-sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ziyo-sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ziyo-sidebar-menu li a:hover,
+        .ziyo-sidebar-menu li a.active {
+            background-color: white;
+            color: var(--ziyo-blue);
+        }
+
+        .ziyo-sidebar-menu li a i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .ziyo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .ziyo-section-title {
+            background-color: var(--ziyo-blue);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: -15px;
+            z-index: 1;
+        }
+
+        .ziyo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--ziyo-border);
+            overflow: hidden;
+        }
+
+        .ziyo-card-header {
+            padding: 15px 25px;
+            background-color: #F9FAFB;
+            border-bottom: 1px solid var(--ziyo-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ziyo-blue);
+            font-weight: 600;
+        }
+
+        .ziyo-card-body {
+            padding: 30px 25px;
+        }
+
+        .ziyo-alert-error {
+            background-color: #FF5A5A;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .ziyo-alert-error strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
+        .ziyo-btn-action {
+            background-color: #00A3A3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            float: right;
+            transition: 0.2s;
+        }
+
+        .ziyo-btn-action:hover {
+            background-color: #008E8E;
+            transform: translateY(-1px);
+        }
+
+        /* Logout button */
+        .ziyo-logout-wrapper {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ziyo-logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 30px;
+            color: #FFB3B3;
+            text-decoration: none;
+            font-weight: 600;
+            width: 100%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .ziyo-logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #FFDADA;
+        }
+
+        /* Stats grid from existing design but adapted */
+        .stats-ziyo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-ziyo-item {
+            text-align: center;
+            padding: 20px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .stat-ziyo-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--ziyo-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-ziyo-label {
+            color: #64748B;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .ziyo-layout {
+                grid-template-columns: 1fr;
+            }
+            .ziyo-search-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ZiyoNET Style Header -->
+    <header class="ziyo-header">
+        <div class="container">
+            <a href="index.html" class="ziyo-logo">
+                <i class="fas fa-book-open"></i>
+                Feruza <span>Channel</span>
+            </a>
+
+            <div class="ziyo-search-bar">
+                <input type="text" placeholder="Qidiruv..." data-i18n="hero_search_placeholder">
+                <button>
+                    <i class="fas fa-search"></i>
+                    <span data-i18n="hero_search_btn">Qidiruv</span>
+                </button>
+            </div>
+
+            <div class="ziyo-header-right">
+                <div class="lang-selector">
+                    <button class="ziyo-icon-btn" onclick="toggleLangDropdown()">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="uz" onclick="changeLanguage('uz')">O'zbekcha (UZ)</div>
+                        <div class="lang-option" data-lang="ja" onclick="changeLanguage('ja')">日本語 (JA)</div>
+                        <div class="lang-option" data-lang="en" onclick="changeLanguage('en')">English (EN)</div>
+                        <div class="lang-option" data-lang="ru" onclick="changeLanguage('ru')">Русский (RU)</div>
+                    </div>
+                </div>
+
+                <div class="ziyo-icon-btn">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="ziyo-icon-btn">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="ziyo-user-avatar" id="header-avatar">U</div>
+                <div class="ziyo-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="ziyo-breadcrumbs">
+        <a href="index.html" data-i18n="nav_home">Asosiy</a> &gt; <span data-i18n="profile_title">Profilni sozlash</span>
+    </div>
+
+    <!-- Layout -->
+    <div class="ziyo-layout">
+        <!-- Sidebar -->
+        <aside class="ziyo-sidebar">
+            <div class="ziyo-sidebar-header">
+                <div class="ziyo-sidebar-avatar" id="user-avatar">U</div>
+                <h3 class="ziyo-sidebar-name" id="user-name">Yuklanmoqda...</h3>
+            </div>
+            <ul class="ziyo-sidebar-menu">
+                <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span data-i18n="profile_menu_info">Profil</span></a></li>
+                <li><a href="courses.html"><i class="fas fa-users"></i> <span data-i18n="profile_menu_courses">Darslar</span></a></li>
+                <li><a href="#"><i class="fas fa-layer-group"></i> <span data-i18n="profile_menu_resources">Resurslar</span></a></li>
+                <li><a href="#"><i class="fas fa-images"></i> <span data-i18n="profile_menu_media">Media-fayllar</span></a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> <span data-i18n="profile_menu_rating">Reyting</span></a></li>
+            </ul>
+            <div class="ziyo-logout-wrapper">
+                <button onclick="handleLogout()" class="ziyo-logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span data-i18n="logout_btn">Tizimdan chiqish</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="ziyo-content">
+            <div class="ziyo-section-title">
+                <i class="fas fa-user-circle"></i>
+                <span data-i18n="profile_menu_info">Profil</span>
+            </div>
+
+            <!-- Photos Card -->
+            <div class="ziyo-card">
+                <div class="ziyo-card-header">
+                    <i class="fas fa-image"></i>
+                    <span data-i18n="profile_photos_header">Fotosuratlar</span>
+                </div>
+                <div class="ziyo-card-body">
+                    <div class="ziyo-alert-error">
+                        <strong data-i18n="profile_error_title">Ошибка</strong>
+                        <span data-i18n="profile_error_email_not_verified">Your email address is not verified.</span>
+                    </div>
+                    <button class="ziyo-btn-action">
+                        <i class="fas fa-plus"></i>
+                        <span data-i18n="profile_add_files">Fayllarni qo'shish</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Welcome/Stats Card -->
+            <div class="ziyo-card">
+                <div class="ziyo-card-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span data-i18n="profile_welcome">Xush kelibsiz!</span>
+                </div>
+                <div class="ziyo-card-body">
+                    <p data-i18n="profile_summary_subtitle" style="margin-bottom: 30px;">Bu sizning shaxsiy kabinetingiz. Endi istalgan darsni ko'rib, uning PDF materialini o'z emailingizga bitta tugma orqali bepul yuborishingiz mumkin.</p>
+                    
+                    <div class="stats-ziyo-grid">
+                        <div class="stat-ziyo-item">
+                            <div class="stat-ziyo-value" id="courses-count">0</div>
+                            <div class="stat-ziyo-label" data-i18n="profile_stat_courses">Kurslar soni</div>
+                        </div>
+                        <div class="stat-ziyo-item">
+                            <div class="stat-ziyo-value" id="completed-count">0</div>
+                            <div class="stat-ziyo-label" data-i18n="profile_stat_completed">Tugatilgan darslar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Mockup Card -->
+            <div class="ziyo-card">
+                <div class="ziyo-card-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span data-i18n="profile_education_header">Ta'lim</span>
+                </div>
+                <div class="ziyo-card-body">
+                    <div class="ziyo-alert-error">
+                        <strong data-i18n="profile_error_title">Ошибка</strong>
+                        <span data-i18n="profile_error_email_not_verified">Your email address is not verified.</span>
+                    </div>
+                    <button class="ziyo-btn-action">
+                        <i class="fas fa-plus"></i>
+                        <span data-i18n="profile_add">Qo'shish</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer same as previous but minimalist -->
+    <footer class="footer-minimal" style="background: white; border-top: 1px solid var(--ziyo-border); padding: 40px 0;">
+        <div class="container" style="text-align: center;">
+            <p style="color: #64748B;">&copy; 2026 Feruza Channel. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            const name = user.name || 'Foydalanuvchi';
+            document.getElementById('user-name').textContent = name;
+            document.getElementById('user-avatar').textContent = name.charAt(0).toUpperCase();
+            document.getElementById('header-avatar').textContent = name.charAt(0).toUpperCase();
+        });
+
+        function handleLogout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>
