@@ -36,6 +36,8 @@
                     <div class="lang-dropdown" id="lang-dropdown">
                         <div class="lang-option" data-lang="uz" onclick="changeLanguage('uz')">O'zbekcha (UZ)</div>
                         <div class="lang-option" data-lang="ja" onclick="changeLanguage('ja')">日本語 (JA)</div>
+                        <div class="lang-option" data-lang="en" onclick="changeLanguage('en')">English (EN)</div>
+                        <div class="lang-option" data-lang="ru" onclick="changeLanguage('ru')">Русский (RU)</div>
                     </div>
                 </div>
                 <a href="register.html" id="auth-nav-btn" class="btn btn-nav" data-i18n="nav_register">Ro'yxatdan
@@ -86,20 +88,34 @@
         </div>
     </section>
 
-    <main class="container">
-        <section id="lessons" class="animate">
-            <div class="section-header">
-                <h2 data-i18n="popular_courses_title">Bizning ommabop <span class="accent">kurslarimiz</span></h2>
-                <p data-i18n="popular_courses_subtitle">O'zingizga kerakli bo'limni tanlang va o'rganishni boshlang.</p>
+    <!-- Teacher Bio Section -->
+    <section class="teacher-section animate">
+        <div class="container teacher-grid">
+            <div class="teacher-image">
+                <div class="image-box">
+                    <img src="assets/sensei-okamoto.png" alt="Fumiyo Okamoto">
+                </div>
             </div>
-            <div id="lessons-list" class="lesson-grid">
-                <!-- Lessons will be loaded by JS -->
-                <div style="text-align: center; grid-column: 1/-1;" data-i18n="loading">Yuklanmoqda...</div>
+            <div class="teacher-content">
+                <h2 class="section-title" data-i18n="teacher_section_title">Bizning ustoz</h2>
+                <p class="bio-text" data-i18n="teacher_bio">
+                    Yaponiyalik ustoz Fumiyo Okamoto hozirda Japan Digital University’da faoliyat yuritmoqda. U 2026-yil yanvar oyida YouTube ijtimoiy tarmog‘ida o‘z blogini yo‘lga qo‘yib, Yaponiya hayoti hamda yapon tili bo‘yicha O‘zbekistonliklar uchun foydali va qiziqarli kontentlar taqdim etishni boshladi.
+                </p>
+                <div class="teacher-achievements">
+                    <a href="https://jdu.uz/" target="_blank" class="achievement">
+                        <span class="ach-icon">🎓</span>
+                        <span>Japan Digital University</span>
+                    </a>
+                    <a href="https://youtube.com/@Feruza_channel" target="_blank" class="achievement">
+                        <span class="ach-icon">🎥</span>
+                        <span data-i18n="teacher_youtube">YouTube Creator</span>
+                    </a>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
 
-    </main>
 
     <footer>
         <div class="container footer-content">

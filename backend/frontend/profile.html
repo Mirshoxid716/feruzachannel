@@ -405,6 +405,8 @@
                     <div class="lang-dropdown" id="lang-dropdown">
                         <div class="lang-option" data-lang="uz" onclick="changeLanguage('uz')">O'zbekcha (UZ)</div>
                         <div class="lang-option" data-lang="ja" onclick="changeLanguage('ja')">日本語 (JA)</div>
+                        <div class="lang-option" data-lang="en" onclick="changeLanguage('en')">English (EN)</div>
+                        <div class="lang-option" data-lang="ru" onclick="changeLanguage('ru')">Русский (RU)</div>
                     </div>
                 </div>
 
@@ -438,9 +440,9 @@
             <ul class="ziyo-sidebar-menu">
                 <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span data-i18n="profile_menu_info">Profil</span></a></li>
                 <li><a href="courses.html"><i class="fas fa-users"></i> <span data-i18n="profile_menu_courses">Darslar</span></a></li>
-                <li><a href="#"><i class="fas fa-layer-group"></i> <span data-i18n="nav_courses">Resurslar</span></a></li>
-                <li><a href="#"><i class="fas fa-images"></i> <span>Media-fayllar</span></a></li>
-                <li><a href="#"><i class="fas fa-chart-line"></i> <span>Reyting</span></a></li>
+                <li><a href="#"><i class="fas fa-layer-group"></i> <span data-i18n="profile_menu_resources">Resurslar</span></a></li>
+                <li><a href="#"><i class="fas fa-images"></i> <span data-i18n="profile_menu_media">Media-fayllar</span></a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> <span data-i18n="profile_menu_rating">Reyting</span></a></li>
             </ul>
             <div class="ziyo-logout-wrapper">
                 <button onclick="handleLogout()" class="ziyo-logout-btn">
@@ -461,16 +463,16 @@
             <div class="ziyo-card">
                 <div class="ziyo-card-header">
                     <i class="fas fa-image"></i>
-                    <span>Fotosuratlar</span>
+                    <span data-i18n="profile_photos_header">Fotosuratlar</span>
                 </div>
                 <div class="ziyo-card-body">
                     <div class="ziyo-alert-error">
-                        <strong>Ошибка</strong>
-                        Your email address is not verified.
+                        <strong data-i18n="profile_error_title">Ошибка</strong>
+                        <span data-i18n="profile_error_email_not_verified">Your email address is not verified.</span>
                     </div>
                     <button class="ziyo-btn-action">
                         <i class="fas fa-plus"></i>
-                        <span>Fayllarni qo'shish</span>
+                        <span data-i18n="profile_add_files">Fayllarni qo'shish</span>
                     </button>
                 </div>
             </div>
@@ -501,16 +503,16 @@
             <div class="ziyo-card">
                 <div class="ziyo-card-header">
                     <i class="fas fa-graduation-cap"></i>
-                    <span>Ta'lim</span>
+                    <span data-i18n="profile_education_header">Ta'lim</span>
                 </div>
                 <div class="ziyo-card-body">
                     <div class="ziyo-alert-error">
-                        <strong>Ошибка</strong>
-                        Your email address is not verified.
+                        <strong data-i18n="profile_error_title">Ошибка</strong>
+                        <span data-i18n="profile_error_email_not_verified">Your email address is not verified.</span>
                     </div>
                     <button class="ziyo-btn-action">
                         <i class="fas fa-plus"></i>
-                        <span>Qo'shish</span>
+                        <span data-i18n="profile_add">Qo'shish</span>
                     </button>
                 </div>
             </div>

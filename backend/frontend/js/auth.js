@@ -41,8 +41,9 @@ async function handleLogin(e) {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
     const errorEl = document.getElementById('login-error');
+    const lang = localStorage.getItem('app_lang') || 'uz';
 
-    errorEl.innerText = 'Yuklanmoqda...';
+    errorEl.innerText = window.i18n[lang].loading || 'Yuklanmoqda...';
 
     try {
         const res = await fetch(`${AUTH_API}/login`, {
@@ -56,10 +57,10 @@ async function handleLogin(e) {
             saveAuthData(data.token, data.user);
             redirectAfterLogin();
         } else {
-            errorEl.innerText = data.error || 'Autentifikatsiya xatosi';
+            errorEl.innerText = data.error || window.i18n[lang].auth_error || 'Autentifikatsiya xatosi';
         }
     } catch (err) {
-        errorEl.innerText = 'Serverga ulanib bo\'lmadi';
+        errorEl.innerText = window.i18n[lang].auth_server_error || 'Serverga ulanib bo\'lmadi';
     }
 }
 
@@ -69,11 +70,12 @@ async function handleRegister(e) {
     const email = document.getElementById('reg-email').value;
     const password = document.getElementById('reg-password').value;
     const errorEl = document.getElementById('reg-error');
+    const lang = localStorage.getItem('app_lang') || 'uz';
 
-    errorEl.innerText = 'Yuklanmoqda...';
+    errorEl.innerText = window.i18n[lang].loading || 'Yuklanmoqda...';
 
     if (password.length < 6) {
-        errorEl.innerText = 'Parol kamida 6 belgi bo\'lishi kerak';
+        errorEl.innerText = window.i18n[lang].auth_password_short || 'Parol kamida 6 belgi bo\'lishi kerak';
         return;
     }
 
@@ -97,9 +99,9 @@ async function handleRegister(e) {
 
             redirectAfterLogin();
         } else {
-            errorEl.innerText = data.error || 'Ro\'yxatdan o\'tishda xatolik';
+            errorEl.innerText = data.error || window.i18n[lang].auth_register_error || 'Ro\'yxatdan o\'tishda xatolik';
         }
     } catch (err) {
-        errorEl.innerText = 'Serverga ulanib bo\'lmadi';
+        errorEl.innerText = window.i18n[lang].auth_server_error || 'Serverga ulanib bo\'lmadi';
     }
 }

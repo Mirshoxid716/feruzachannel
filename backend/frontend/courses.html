@@ -38,6 +38,8 @@
                     <div class="lang-dropdown" id="lang-dropdown">
                         <div class="lang-option" data-lang="uz" onclick="changeLanguage('uz')">O'zbekcha (UZ)</div>
                         <div class="lang-option" data-lang="ja" onclick="changeLanguage('ja')">日本語 (JA)</div>
+                        <div class="lang-option" data-lang="en" onclick="changeLanguage('en')">English (EN)</div>
+                        <div class="lang-option" data-lang="ru" onclick="changeLanguage('ru')">Русский (RU)</div>
                     </div>
                 </div>
                 <a href="register.html" id="auth-nav-btn" class="btn btn-nav" data-i18n="nav_register">Ro'yxatdan
@@ -50,14 +52,14 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section">
-                <p class="section-label">Library</p>
+                <p class="section-label" data-i18n="courses_sidebar_library">Library</p>
                 <ul class="sidebar-nav">
-                    <li class="active"><i>📁</i> Barcha darslar</li>
-                    <li><i>⭐</i> Sevimlilar</li>
+                    <li class="active" data-i18n="courses_sidebar_all">📁 Barcha darslar</li>
+                    <li data-i18n="courses_sidebar_favorites">⭐ Sevimlilar</li>
                 </ul>
             </div>
             <div class="sidebar-section">
-                <p class="section-label">Folders</p>
+                <p class="section-label" data-i18n="courses_sidebar_folders">Folders</p>
                 <ul class="sidebar-nav">
                     <li><i>📂</i> N5 Boshlang'ich</li>
                     <li><i>📂</i> N4 Davomchi</li>
@@ -67,10 +69,10 @@
                 </ul>
             </div>
             <div class="sidebar-section">
-                <p class="section-label">Showcases</p>
+                <p class="section-label" data-i18n="courses_sidebar_showcases">Showcases</p>
                 <ul class="sidebar-nav">
-                    <li><i>🎬</i> Jonli darslar</li>
-                    <li><i>📝</i> Testlar</li>
+                    <li data-i18n="courses_sidebar_live">🎬 Jonli darslar</li>
+                    <li data-i18n="courses_sidebar_tests">📝 Testlar</li>
                 </ul>
             </div>
         </aside>
