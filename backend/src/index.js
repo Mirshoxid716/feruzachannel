@@ -25,7 +25,7 @@ app.use(helmet({
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             imgSrc: ["'self'", "data:", "https://img.youtube.com"],
             frameSrc: ["'self'", "https://www.youtube.com"],
-            connectSrc: ["'self'", "http://localhost:5000"],
+            connectSrc: ["'self'", "http://localhost:5000", "https://feruzachannel.onrender.com"],
         }
     }
 }));

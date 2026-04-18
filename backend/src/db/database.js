@@ -157,8 +157,10 @@ async function initializeSchema() {
   }
 }
 
-// Initialize on load
-initializeSchema();
+// Initialize on load with success check
+initializeSchema().then(() => {
+    console.log('Database system is fully operational.');
+});
 
 module.exports = {
   query,
